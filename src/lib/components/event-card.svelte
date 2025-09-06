@@ -23,7 +23,7 @@
 	function gotoPage() {
 		const link =
 			event.team.max > 1
-				? `/events/register/hackathon?id=${event.id}`
+				? `/events/register/group/${event.id}`
 				: `/events/register/event?id=${event.id}`;
 		goto(link);
 	}

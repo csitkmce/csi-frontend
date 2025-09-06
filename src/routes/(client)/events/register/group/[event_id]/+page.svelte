@@ -1,80 +1,106 @@
 <script lang="ts">
-	import type { Event, User } from '$lib/types';
-	let isCreate = $state(false);
+  import { onMount } from "svelte";
+  import { goto, invalidateAll } from '$app/navigation';
+  import { page } from '$app/stores';
+  import { PUBLIC_API_URL } from '$env/static/public';
+  import { isLoggedin } from '$lib/stores/auth';
+  import type { Event, User } from '$lib/types';
 
-	function toggleMode(title: string) {
-		isCreate = title === 'create';
-	}
+  let isCreate = true;
+  let details: { event?: Event; user?: User } = {};
+  let teamName = "";
+  let loading = false;
+  let error = "";
+  let success = "";
 
-	import { goto, invalidate, invalidateAll } from '$app/navigation';
-	import { page } from '$app/stores';
-	import { PUBLIC_API_URL } from '$env/static/public';
-	import { isLoggedin } from '$lib/stores/auth';
+  function toggleMode(mode: 'create' | 'join') {
+      isCreate = mode === 'create';
+  }
 
-	let details: {
-		event?: Event;
-		user?: User;
-	} = $state({});
+  onMount(async () => {
+    const accessToken = localStorage.getItem('accessToken');
+    const eventId = $page.params.event_id;
 
-	$effect(() => {
-		async function fetchData() {
-			const searchParams = $page.url.searchParams;
-			const id = searchParams.get('id');
+    if (!accessToken) {
+      await invalidateAll();
+      await goto('/login');
+      return;
+    }
 
-			const accessToken = localStorage.getItem('accessToken');
+    try {
+      const res = await fetch(`${PUBLIC_API_URL}/api/events/${eventId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        credentials: 'include'
+      });
 
-			if (!accessToken) {
-				await invalidateAll();
-				await goto('/login');
-			}
+      if (res.status === 401) {
+        localStorage.removeItem('accessToken');
+        isLoggedin.set(false);
+        goto('/login');
+      } else if (res.ok) {
+        details = await res.json();
+        isLoggedin.set(true);
+      } else {
+        throw new Error('Failed to fetch event details');
+      }
+    } catch (err) {
+      console.error(err);
+      localStorage.removeItem('accessToken');
+      isLoggedin.set(false);
+      goto('/login');
+    }
+  });
 
-			try {
-				const res = await fetch(`${PUBLIC_API_URL}/api/events/${id}`, {
-					method: 'GET',
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: `Bearer ${accessToken}`
-					},
-					credentials: 'include'
-				});
+  async function register() {
+    error = "";
+    success = "";
+    loading = true;
 
-				if (res.status === 401) {
-					const resRefresh = await fetch(`${PUBLIC_API_URL}/api/refresh/`, {
-						method: 'GET',
-						headers: {
-							'Content-Type': 'application/json'
-						},
-						credentials: 'include'
-					});
+    const accessToken = localStorage.getItem('accessToken');
+    const eventId = $page.params.event_id;
 
-					if (resRefresh.status === 401) {
-						localStorage.removeItem('accessToken');
-						isLoggedin.set(false);
-						goto('/login');
-					} else if (resRefresh.status === 200) {
-						const { accessToken: newToken } = await resRefresh.json();
-						localStorage.setItem('accessToken', newToken);
-						isLoggedin.set(true);
-						details = await resRefresh.json();
-					} else {
-						throw new Error('Refresh request failed');
-					}
-				} else if (res.status === 200) {
-					isLoggedin.set(true);
-					details = await res.json();
-				} else {
-					throw new Error('User request failed');
-				}
-			} catch (error) {
-				console.error('Auth check failed:', error);
-				localStorage.removeItem('accessToken');
-				isLoggedin.set(false);
-				goto('/login');
-			}
-		}
-		fetchData();
-	});
+    if (!accessToken) {
+      error = "You must be logged in.";
+      loading = false;
+      return;
+    }
+
+    try {
+      const body = isCreate ? { eventId, teamName } : { eventId, teamCode: teamName };
+
+      const res = await fetch(`${PUBLIC_API_URL}/api/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`
+        },
+        body: JSON.stringify(body)
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        error = data.message || "Registration failed";
+        return;
+      }
+
+      success = "✅ Registered successfully!";
+      console.log("Registration success:", data);
+
+      goto("/");
+    } catch (err) {
+      console.error(err);
+      error = "Something went wrong.";
+    } finally {
+      loading = false;
+    }
+  }
 </script>
+
 
 <div class="flex w-full flex-col items-start justify-start gap-y-2 overflow-hidden p-4">
 	<div class="flex gap-x-2 max-sm:flex-col">
@@ -128,16 +154,21 @@
 						<li><p>You will be the team leader</p></li>
 						<li><p>Others can use this code to join your team</p></li>
 					</ul>
-					<label for="email" class="mt-4 mb-2">Enter your team name below:</label>
+					<label for="teamName" class="mt-4 mb-2">Enter your team name below:</label>
 					<input
-						name="email"
+						id="teamName"
+						name="teamName"
 						placeholder="Team name"
+						bind:value={teamName}
 						class="h-8 w-full rounded bg-[#505050] p-2"
-						type="email"
+						type="text"
 					/>
 				</div>
 				<div class="flex w-full items-center justify-center">
-					<button
+					<button onclick={(e) => {
+      e.preventDefault();
+      register();
+    }}
 						class="m-4 cursor-pointer border-1 border-black bg-[#ffffff] px-6 py-3 text-black ease-in-out hover:bg-[#222222] hover:text-white"
 					>
 						Pay and Create Team
@@ -151,9 +182,9 @@
 					<div class="flex items-center gap-x-2">
 						<input
 							name="email"
-							placeholder="Team name"
+							placeholder="Team code"
 							class="h-8 w-full rounded bg-[#505050] p-2"
-							type="email"
+							type="text"
 						/>
 						<button class="cursor-pointer rounded bg-[#222222] px-3 py-1"> Check </button>
 					</div>
