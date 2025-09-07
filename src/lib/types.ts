@@ -57,6 +57,8 @@ export type Event = {
 		min: number;
 		max: number;
 	};
+	teamCode?: string;
+	certificateUrl?: string;
 };
 
 export type ExecomMember = {

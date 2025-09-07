@@ -11,7 +11,7 @@
 	}: {
 		event: Event;
 		details?: {
-			status: 'upcoming' | 'ongoing' | 'past' | 'myevent'; //values: upcoming, registered, myevent
+			status: 'upcoming' | 'ongoing' | 'past' | 'myevent';
 			isCertificateAvailable?: boolean;
 		};
 	} = $props();
@@ -74,18 +74,29 @@
 				disabled={!enableRegister()}>Register</button
 			>
 		{:else if details?.status === 'myevent'}
-			<div class="flex w-full items-center justify-center max-sm:flex-col min-sm:gap-2">
-				<button
+	<div class="flex w-full items-center justify-center max-sm:flex-col min-sm:gap-2">
+		{#if !details.isCertificateAvailable}
+			<!-- Before event ends → show team code -->
+			 <button
 					class="mt-2 cursor-pointer bg-[#BFBFBF] p-2 text-black hover:bg-black hover:text-white max-sm:w-full"
 					>Ticket</button
 				>
-				<button
-					class="mt-2 cursor-pointer max-sm:w-full {details.isCertificateAvailable
-						? 'bg-[#BFBFBF] text-black hover:bg-black hover:text-white'
-						: 'bg-[#efefef] text-[#bfbfbf]'} p-2">Certificate</button
-				>
-			</div>
+			<button
+				class="mt-2 cursor-pointer bg-[#BFBFBF] p-2 text-black hover:bg-black hover:text-white max-sm:w-full"
+			>
+				Team Code: {event.teamCode}
+			</button>
+		{:else}
+			<!-- After event ends → show certificate -->
+			<button
+				class="mt-2 cursor-pointer max-sm:w-full bg-[#BFBFBF] text-black hover:bg-black hover:text-white p-2"
+			>
+				Certificate
+			</button>
 		{/if}
+	</div>
+{/if}
+
 	</div>
 	<div class="mt-auto flex w-full items-center justify-between bg-[#BFBFBF] p-2 text-black">
 		<p class="font-bold">{event.eventStartDate}</p>
