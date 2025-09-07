@@ -8,13 +8,14 @@
 
   let isCreate = true;
   let details: { event?: Event; user?: User } = {};
-  let teamName = "";
+  let teamName = "";   // for create
+  let teamCode = "";   // for join
   let loading = false;
   let error = "";
   let success = "";
 
   function toggleMode(mode: 'create' | 'join') {
-      isCreate = mode === 'create';
+    isCreate = mode === 'create';
   }
 
   onMount(async () => {
@@ -70,9 +71,12 @@
     }
 
     try {
-      const body = isCreate ? { eventId, teamName } : { eventId, teamCode: teamName };
+      const endpoint = isCreate ? "/api/register" : "/api/register/join-team";
+      const body = isCreate 
+        ? { eventId, teamName }
+        : { eventId, teamCode };
 
-      const res = await fetch(`${PUBLIC_API_URL}/api/register`, {
+      const res = await fetch(`${PUBLIC_API_URL}${endpoint}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -88,9 +92,11 @@
         return;
       }
 
-      success = "✅ Registered successfully!";
-      console.log("Registration success:", data);
+      success = isCreate 
+        ? "✅ Team created successfully!"
+        : "✅ Joined team successfully!";
 
+      console.log("Registration success:", data);
       goto("/");
     } catch (err) {
       console.error(err);
@@ -99,7 +105,44 @@
       loading = false;
     }
   }
+  let teamMembers: { name: string; email: string }[] = [];
+
+async function checkTeam() {
+  error = "";
+  success = "";
+  teamMembers = [];
+
+  const accessToken = localStorage.getItem("accessToken");
+  if (!teamCode) {
+    error = "Please enter a team code.";
+    return;
+  }
+
+  try {
+    const res = await fetch(`${PUBLIC_API_URL}/api/register/teams/${teamCode}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    if (!res.ok) {
+      error = "Invalid team code.";
+      return;
+    }
+
+    const data = await res.json();
+teamMembers = Array.isArray(data.data.members) ? data.data.members : [];
+
+success = "✅ Team found!";
+
+  } catch (err) {
+    console.error(err);
+    error = "Could not fetch team details.";
+  }
+}
+
 </script>
+
 
 
 <div class="flex w-full flex-col items-start justify-start gap-y-2 overflow-hidden p-4">
@@ -176,35 +219,56 @@
 				</div>
 			</form>
 		{:else}
-			<form class="flex flex-col items-center">
-				<div class="flex w-full flex-col px-2">
-					<label for="email" class="mt-4 mb-2">Enter team code below:</label>
-					<div class="flex items-center gap-x-2">
-						<input
-							name="email"
-							placeholder="Team code"
-							class="h-8 w-full rounded bg-[#505050] p-2"
-							type="text"
-						/>
-						<button class="cursor-pointer rounded bg-[#222222] px-3 py-1"> Check </button>
-					</div>
-				</div>
-				<div class="mt-8 w-full px-2">
-					<p class="text-lg">Team members</p>
-					<ul class="text-md mt-2 ml-4 list-disc space-y-2">
-						<li><p>Team member 1</p></li>
-						<li><p>Team member 2</p></li>
-						<li><p>Team member 3</p></li>
-					</ul>
-				</div>
-				<div class="flex w-full items-center justify-center">
-					<button
-						class="m-4 cursor-pointer border-1 border-black bg-[#ffffff] px-6 py-3 text-black ease-in-out hover:bg-[#222222] hover:text-white"
-					>
-						Join Team
-					</button>
-				</div>
-			</form>
-		{/if}
+  <form class="flex flex-col items-center">
+    <div class="flex w-full flex-col px-2">
+      <label for="teamCode" class="mt-4 mb-2">Enter team code below:</label>
+      <div class="flex items-center gap-x-2">
+        <input
+          id="teamCode"
+          name="teamCode"
+          placeholder="Team code"
+          bind:value={teamCode}
+          class="h-8 w-full rounded bg-[#505050] p-2"
+          type="text"
+        />
+        <button
+          onclick={async (e) => {
+            e.preventDefault();
+            await checkTeam();
+          }}
+          class="cursor-pointer rounded bg-[#222222] px-3 py-1"
+        >
+          Check
+        </button>
+      </div>
+    </div>
+
+    <div class="mt-8 w-full px-2">
+      <p class="text-lg">Team members</p>
+      <ul class="text-md mt-2 ml-4 list-disc space-y-2">
+        {#if teamMembers.length > 0}
+          {#each teamMembers as member}
+            <li><p>{member.name} ({member.email})</p></li>
+          {/each}
+        {:else}
+          <li><p>No members found yet.</p></li>
+        {/if}
+      </ul>
+    </div>
+
+    <div class="flex w-full items-center justify-center">
+      <button
+        onclick={(e) => {
+          e.preventDefault();
+          register();
+        }}
+        class="m-4 cursor-pointer border-1 border-black bg-[#ffffff] px-6 py-3 text-black ease-in-out hover:bg-[#222222] hover:text-white"
+      >
+        Join Team
+      </button>
+    </div>
+  </form>
+{/if}
+
 	</div>
 </div>
