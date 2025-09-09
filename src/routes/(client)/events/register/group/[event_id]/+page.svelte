@@ -214,7 +214,7 @@ success = "✅ Team found!";
     }}
 						class="m-4 cursor-pointer border-1 border-black bg-[#ffffff] px-6 py-3 text-black ease-in-out hover:bg-[#222222] hover:text-white"
 					>
-						Pay and Create Team
+						Create Team
 					</button>
 				</div>
 			</form>

@@ -13,4 +13,4 @@ export async function getLeaderboard(): Promise<LeaderBoard[]> {
 		throw new Error(error.meesage);
 	}
 	return await res.json();
-}
+}	
