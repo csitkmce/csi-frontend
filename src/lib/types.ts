@@ -58,6 +58,8 @@ export type Event = {
 		max: number;
 	};
 	teamCode?: string;
+	maxRegistrations?: number;
+  	whatsappLink?: string;	
 	certificateUrl?: string;
 };
 
