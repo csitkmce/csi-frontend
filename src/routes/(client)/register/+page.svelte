@@ -113,7 +113,7 @@
 							: ''}"
 						type="email"
 					/>
-					<p class="text-md w-fit">Department</p>
+					<p class="text-md w-fit">Branch</p>
 					<select
 						name="department"
 						class="flex h-8 w-full items-center rounded-xs border-1 border-black {errorField ===
