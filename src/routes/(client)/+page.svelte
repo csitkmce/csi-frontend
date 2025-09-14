@@ -24,7 +24,7 @@
 			if ($isLoggedin) {
 				const accessToken: string = localStorage.getItem('accessToken')!;
 				try {
-					const res = await fetch(`/api/`, {
+					const res = await fetch(`${PUBLIC_API_URL}/api/`, {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',
