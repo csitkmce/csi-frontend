@@ -18,7 +18,7 @@
 		const eventId = $page.params.event_id;
 		const accessToken = localStorage.getItem('accessToken');
 
-		if (!eventId || !accessToken) {
+		if (!accessToken) {
 			goto('/login');
 			return;
 		}
