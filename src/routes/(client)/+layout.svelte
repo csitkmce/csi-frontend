@@ -1,26 +1,21 @@
 <script lang="ts">
 	import { goto, invalidateAll } from '$app/navigation';
 	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
 	import '../../app.css';
 	import { InstagramIcon, LinkedinIcon, MailIcon, Menu } from '@lucide/svelte';
 	import { isLoggedin } from '$lib/stores/auth';
-	import { lastTab } from '$lib/stores/lastTab';
 	import { PUBLIC_API_URL } from '$env/static/public';
-	let { children, data } = $props();
 
+	let { children, data } = $props();
 	let isMenuOpen: boolean = $state(false);
 
 	function toggleMenu(): void {
 		isMenuOpen = !isMenuOpen;
 	}
 
-	function closeMenu(page: string): void {
+	function closeMenu(): void {
 		isMenuOpen = false;
-		setActivePage(page);
-	}
-
-	function setActivePage(page: string) {
-		lastTab.set(page);
 	}
 
 	async function handleLoginLogout() {
@@ -104,31 +99,18 @@
 			<div class="flex items-center max-sm:hidden">
 				<ul class="flex gap-5 text-[#808080]">
 					<li>
-						<a
-							onclick={() => setActivePage('home')}
-							class={$lastTab === 'home' ? 'text-white' : ''}
-							href="/">Home</a
+						<a class={$page.url.pathname === '/' ? 'text-white' : ''} href="/">Home</a>
+					</li>
+					<li>
+						<a class={$page.url.pathname === '/leaderboard' ? 'text-white' : ''} href="/leaderboard"
+							>LeaderBoard</a
 						>
 					</li>
 					<li>
-						<a
-							onclick={() => setActivePage('leaderboard')}
-							class={$lastTab === 'leaderboard' ? 'text-white' : ''}
-							href="/leaderboard">LeaderBoard</a
-						>
+						<a class={$page.url.pathname === '/team' ? 'text-white' : ''} href="/team">Team</a>
 					</li>
 					<li>
-						<a
-							onclick={() => setActivePage('team')}
-							class={$lastTab === 'team' ? 'text-white' : ''}
-							href="/team">Team</a
-						>
-					</li>
-					<li>
-						<a
-							onclick={() => setActivePage('events')}
-							class={$lastTab === 'events' ? 'text-white' : ''}
-							href="/events">Events</a
+						<a class={$page.url.pathname === '/events' ? 'text-white' : ''} href="/events">Events</a
 						>
 					</li>
 					<li>
@@ -140,11 +122,12 @@
 			</div>
 		</nav>
 	</header>
+
 	{#if isMenuOpen}
 		<div
 			class="fixed inset-0 z-20 bg-[#00000050] min-sm:hidden"
-			onclick={() => closeMenu($lastTab)}
-			onkeydown={(e) => e.key === 'Escape' && closeMenu($lastTab)}
+			onclick={closeMenu}
+			onkeydown={(e) => e.key === 'Escape' && closeMenu()}
 			role="button"
 			tabindex="0"
 		></div>
@@ -154,7 +137,7 @@
 			class="fixed top-0 right-0 z-30 h-screen w-64 transform bg-[#222222] shadow-lg transition-transform duration-300 ease-in-out min-sm:hidden"
 		>
 			<div class="flex h-20 items-center justify-end border-b-1 border-[#181818] p-5">
-				<button onclick={() => closeMenu($lastTab)} aria-label="Toggle menu">
+				<button onclick={closeMenu} aria-label="Toggle menu">
 					<Menu />
 				</button>
 			</div>
@@ -164,8 +147,8 @@
 					<li>
 						<a
 							href="/"
-							class={`block py-2 text-lg ${$lastTab === 'home' ? 'text-white' : ''}`}
-							onclick={() => closeMenu('home')}
+							class={`block py-2 text-lg ${$page.url.pathname === '/' ? 'text-white' : ''}`}
+							onclick={closeMenu}
 						>
 							Home
 						</a>
@@ -173,8 +156,8 @@
 					<li>
 						<a
 							href="/leaderboard"
-							class={`block py-2 text-lg ${$lastTab === 'leaderboard' ? 'text-white' : ''}`}
-							onclick={() => closeMenu('leaderboard')}
+							class={`block py-2 text-lg ${$page.url.pathname === '/leaderboard' ? 'text-white' : ''}`}
+							onclick={closeMenu}
 						>
 							LeaderBoard
 						</a>
@@ -182,8 +165,8 @@
 					<li>
 						<a
 							href="/team"
-							class={`block py-2 text-lg ${$lastTab === 'team' ? 'text-white' : ''}`}
-							onclick={() => closeMenu('team')}
+							class={`block py-2 text-lg ${$page.url.pathname === '/team' ? 'text-white' : ''}`}
+							onclick={closeMenu}
 						>
 							Team
 						</a>
@@ -191,8 +174,8 @@
 					<li>
 						<a
 							href="/events"
-							class={`block py-2 text-lg ${$lastTab === 'events' ? 'text-white' : ''}`}
-							onclick={() => closeMenu('events')}
+							class={`block py-2 text-lg ${$page.url.pathname === '/events' ? 'text-white' : ''}`}
+							onclick={closeMenu}
 						>
 							Events
 						</a>
@@ -201,7 +184,7 @@
 						<button
 							class="block cursor-pointer py-2 text-left text-lg text-[#008CFF]"
 							onclick={async () => {
-								closeMenu($lastTab);
+								closeMenu();
 								await handleLoginLogout();
 							}}
 						>
@@ -212,9 +195,11 @@
 			</nav>
 		</div>
 	{/if}
+
 	<main class="flex justify-center">
 		{@render children?.()}
 	</main>
+
 	<footer class="flex justify-center border-t-1 border-[#181818] bg-[#222222] text-white">
 		<div class="flex w-full max-w-7xl flex-col justify-center border-x-1 border-[#181818] p-4">
 			<div class="min-sm:flex">
