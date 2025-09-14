@@ -11,8 +11,8 @@
 
 	let posterUrl = '';
 	let error = '';
-	let event: any = null;
-	let user: any = null;
+	let event: Event | null = null;
+	let user: User | null = null;
 
 	onMount(async () => {
 		const eventId = $page.params.event_id;
@@ -32,15 +32,11 @@
 			if (!res.ok) throw new Error('Failed to fetch event details');
 
 			const data = await res.json();
-
-			// Log the entire backend response
 			console.log('Backend response data:', data);
 
-			// Keep backend fields as-is
 			event = data.event;
 			user = data.user;
-
-			posterUrl = event.image || '';
+			posterUrl = event!.image || '';
 			isLoggedin.set(true);
 		} catch (err: any) {
 			error = err.message;
@@ -53,12 +49,10 @@
 	class="flex min-h-screen w-full max-w-7xl items-center border-x border-black bg-[#222222] max-md:flex-col"
 >
 	{#if event && user}
-		<!-- Event Info -->
 		<div class="flex w-full flex-col items-center p-4">
 			<EventInfo {event} {posterUrl} />
 		</div>
 
-		<!-- Registration Form -->
 		{#if event.team?.min && event.team.min > 1}
 			<GroupRegistrationForm {event} {user} />
 		{:else}
