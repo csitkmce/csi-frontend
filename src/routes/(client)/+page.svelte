@@ -201,11 +201,16 @@
 			{#if myEvents.state === 'pending'}
 				Loading
 			{:else if myEvents.state === 'success'}
-				<div class="m-4 border-1 border-[#181818] p-4 shadow-[4px_4px_0_0_[#181818]]">
-					<h2 class="text-2xl">My Events</h2>
-					{#if myEvents.data.events.length < 0}
-						<div class="flex h-full min-h-100 items-center justify-center">
-							<p class="text-lg">No registered events</p>
+				<div class="m-4 flex flex-col border-1 border-[#181818] p-4 shadow-[4px_4px_0_0_[#181818]]">
+					<h2 class="w-full text-2xl">My Events</h2>
+					{#if myEvents.data.events.length === 0}
+						<div class="flex h-100 w-full flex-col items-center justify-center">
+							<div
+								class="/rounded-full /bg-white mx-10 flex w-full max-w-110 items-center justify-center overflow-hidden max-md:max-w-100 min-md:max-w-100"
+							>
+								<img class="w-90" alt="" src="/images/no-events.png" />
+							</div>
+							<p class="text-lg text-[#808080]">No registered events</p>
 						</div>
 					{:else}
 						<div class="flex flex-col gap-4 min-sm:grid sm:grid-cols-2 lg:grid-cols-3">
