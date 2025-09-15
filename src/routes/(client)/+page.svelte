@@ -137,11 +137,12 @@
 				<div class="col-span-2 w-full"></div>
 				<div class="col-span-1 w-full"></div>
 				<div class="col-span-2 w-full bg-[#2D2D2D] px-10 py-4 text-4xl">
-					<p class="text-lg">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam varius dapibus ante at
-						interdum. Maecenas elit velit, interdum non congue at, porta eu lorem. Curabitur id sem
-						pretium, lacinia diam sit amet, dignissim odio. Pellentesque iaculis arcu id elementum
-						facilisis. Etiam sodales id lacus at ornare.
+					<p class="text-sm">
+						At CSI TKMCE, we’re not just coders we’re creators, dreamers, and doers. Our community
+						thrives on curiosity, teamwork, and innovation. We believe technology is more than just
+						code; it’s about solving problems, sparking creativity, and building connections. From
+						fun events and workshops to competitions and projects, CSI gives every student a chance
+						to learn, grow, and shine together.
 					</p>
 				</div>
 			</div>
@@ -161,11 +162,12 @@
 			</div>
 			<div class="flex h-full w-full items-center justify-center p-5 max-md:flex-col-reverse">
 				<div class="my-4 flex w-full">
-					<p class="mx-2 w-full text-lg">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam varius dapibus ante at
-						interdum. Maecenas elit velit, interdum non congue at, porta eu lorem. Curabitur id sem
-						pretium, lacinia diam sit amet, dignissim odio. Pellentesque iaculis arcu id elementum
-						facilisis. Etiam sodales id lacus at ornare.
+					<p class="mx-2 w-full text-sm">
+						At CSI TKMCE, we organize events, workshops, and hackathons that bring out the best in
+						students. We create opportunities to learn the latest technologies, build projects, and
+						share ideas with peers. Our activities range from coding challenges to design sprints,
+						from tech talks to creative competitions. Every initiative is aimed at helping students
+						grow, collaborate, and gain the confidence to lead in the digital era.
 					</p>
 				</div>
 				<div class="flex flex-col items-center">

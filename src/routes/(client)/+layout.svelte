@@ -89,7 +89,7 @@
 	>
 		<nav class="flex w-full max-w-7xl justify-between border-x-1 border-[#181818] p-5">
 			<div class="flex items-center gap-2">
-				<img class="h-10 text-white" src="/images/csi_logo.png" alt="organisation" />
+				<img class="w-20 text-white" src="/images/csi_logo.png" alt="organisation" />
 			</div>
 			<div class="flex cursor-pointer items-center min-sm:hidden">
 				<button onclick={toggleMenu} aria-label="Toggle menu">
@@ -204,7 +204,7 @@
 		<div class="flex w-full max-w-7xl flex-col justify-center border-x-1 border-[#181818] p-4">
 			<div class="min-sm:flex">
 				<div class="flex flex-col justify-center">
-					<img class="w-30 text-white" src="/images/csi_logo.png" alt="organisation" />
+					<img class="w-20 text-white" src="/images/csi_logo.png" alt="organisation" />
 				</div>
 				<div class="flex w-full items-end justify-end gap-4 p-5 max-sm:justify-start">
 					<div class="rounded bg-[#444444] p-1">
