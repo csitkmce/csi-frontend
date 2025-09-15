@@ -203,7 +203,7 @@
 			{:else if myEvents.state === 'success'}
 				<div class="m-4 border-1 border-[#181818] p-4 shadow-[4px_4px_0_0_[#181818]]">
 					<h2 class="text-2xl">My Events</h2>
-					<div class="flex flex-col gap-4 min-sm:grid sm:grid-cols-2 md:grid-cols-3">
+					<div class="flex flex-col gap-4 min-sm:grid sm:grid-cols-2 lg:grid-cols-3">
 						{#each myEvents.data['events'] as event}
 							<EventCard {event} details={{ status: 'myevent' }} />
 						{/each}

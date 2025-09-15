@@ -21,10 +21,7 @@
 	}
 
 	function gotoPage() {
-		const link =
-			event.team.max > 1
-				? `/events/${event.id}`
-				: `/events/${event.id}`;
+		const link = event.team.max > 1 ? `/events/${event.id}` : `/events/${event.id}`;
 		goto(link);
 	}
 </script>
@@ -74,29 +71,30 @@
 				disabled={!enableRegister()}>Register</button
 			>
 		{:else if details?.status === 'myevent'}
-	<div class="flex w-full items-center justify-center max-sm:flex-col min-sm:gap-2">
-		{#if !details.isCertificateAvailable}
-			<!-- Before event ends → show team code -->
-			 <button
-					class="mt-2 cursor-pointer bg-[#BFBFBF] p-2 text-black hover:bg-black hover:text-white max-sm:w-full"
-					>Ticket</button
-				>
-			<button
-				class="mt-2 cursor-pointer bg-[#BFBFBF] p-2 text-black hover:bg-black hover:text-white max-sm:w-full"
-			>
-				Team Code: {event.teamCode}
-			</button>
-		{:else}
-			<!-- After event ends → show certificate -->
-			<button
-				class="mt-2 cursor-pointer max-sm:w-full bg-[#BFBFBF] text-black hover:bg-black hover:text-white p-2"
-			>
-				Certificate
-			</button>
+			<div class="flex w-full flex-col items-center justify-center max-sm:flex-col">
+				{#if !details.isCertificateAvailable}
+					<!-- Before event ends → show team code -->
+					<button
+						class="mt-2 w-full cursor-pointer bg-[#BFBFBF] p-2 text-black hover:bg-black hover:text-white"
+						>Ticket</button
+					>
+					{#if event.teamCode}
+						<button
+							class="mt-2 w-full cursor-pointer bg-[#BFBFBF] p-2 text-black hover:bg-black hover:text-white"
+						>
+							Team Code: {event.teamCode}
+						</button>
+					{/if}
+				{:else}
+					<!-- After event ends → show certificate -->
+					<button
+						class="mt-2 w-full cursor-pointer bg-[#BFBFBF] p-2 text-black hover:bg-black hover:text-white"
+					>
+						Certificate
+					</button>
+				{/if}
+			</div>
 		{/if}
-	</div>
-{/if}
-
 	</div>
 	<div class="mt-auto flex w-full items-center justify-between bg-[#BFBFBF] p-2 text-black">
 		<p class="font-bold">{event.eventStartDate}</p>
