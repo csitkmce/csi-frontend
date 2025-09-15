@@ -203,6 +203,9 @@
 			{#if myEvents.state === 'pending'}
 				Loading
 			{:else if myEvents.state === 'success'}
+				<h3 class="m-4 w-full text-xl text-[#909090]">
+					Hi,<span class="font-bold">{myEvents.data.name.split(' ')[0]}</span>
+				</h3>
 				<div class="m-4 flex flex-col border-1 border-[#181818] p-4 shadow-[4px_4px_0_0_[#181818]]">
 					<h2 class="w-full text-2xl">My Events</h2>
 					{#if myEvents.data.events.length === 0}
