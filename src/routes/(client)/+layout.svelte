@@ -36,7 +36,7 @@
 		}
 
 		try {
-			const res = await fetch(`/api/user/`, {
+			const res = await fetch(`${PUBLIC_API_URL}/api/user/`, {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
@@ -46,7 +46,7 @@
 			});
 
 			if (res.status === 401) {
-				const resRefresh = await fetch(`/api/refresh/`, {
+				const resRefresh = await fetch(`${PUBLIC_API_URL}/api/refresh/`, {
 					method: 'GET',
 					headers: {
 						'Content-Type': 'application/json'
