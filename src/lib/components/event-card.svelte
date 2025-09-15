@@ -178,30 +178,33 @@
 
 <!-- Ticket popup -->
 {#if qrVisible}
-	<div class="absolute inset-0 z-30 flex items-center justify-center bg-[#00000080]">
+	<div class="fixed inset-0 z-30 flex items-center justify-center bg-[#00000080]">
 		<div class="flex flex-col bg-white">
 			<div
-				class="flex max-h-150 min-w-80 flex-col rounded bg-white px-5 py-10 text-black"
+				class="flex max-h-[90vh] min-w-80 flex-col overflow-y-auto rounded bg-white py-10 text-black"
 				bind:this={ticketRef}
 			>
-				<h2 class="mb-10 w-full text-center text-2xl font-bold uppercase">{event.name}</h2>
-				<p class="text-lg">Date: <span class="font-bold">{event.eventStartDate}</span></p>
-				<p>Venue: <span class="font-bold">{event.venue}</span></p>
-				<p>Name: <span class="font-bold">{details.name}</span></p>
-				<p>Email: <span class="font-bold">{details.email}</span></p>
-				<p>Department: <span class="font-bold">{details.department}</span></p>
-				<p>Batch: <span class="font-bold">{details.batch}</span></p>
-				<p>Batch Year: <span class="font-bold">{details.graduationYear}</span></p>
-				{#if event.teamCode}
-					<p class="my-10 w-full text-center font-bold uppercase">
-						Team Code: <span class="font-bold {copied ? 'animate-copy' : ''}">{event.teamCode}</span
-						>
-					</p>
-				{/if}
+				<div class="px-5">
+					<h2 class="mb-10 w-full text-center text-2xl font-bold uppercase">{event.name}</h2>
+					<p class="">Date: <span class="font-bold">{event.eventStartDate}</span></p>
+					<p>Venue: <span class="font-bold">{event.venue}</span></p>
+					<p>Name: <span class="font-bold">{details.name}</span></p>
+					<p>Email: <span class="font-bold">{details.email}</span></p>
+					<p>Department: <span class="font-bold">{details.department}</span></p>
+					<p>Batch: <span class="font-bold">{details.batch}</span></p>
+					<p>Batch Year: <span class="font-bold">{details.graduationYear}</span></p>
+					<p>Team Name: <span class="font-bold">{event.teamName}</span></p>
+				</div>
 				{#if qrCodeDataUrl}
 					<div class="flex w-full justify-center">
 						<img class="max-w-60" src={qrCodeDataUrl} alt="QR Code" />
 					</div>
+				{/if}
+				{#if event.teamCode}
+					<p class="my-3 w-full text-center uppercase">
+						Team Code: <span class="font-bold {copied ? 'animate-copy' : ''}">{event.teamCode}</span
+						>
+					</p>
 				{/if}
 			</div>
 			<div class="flex gap-x-2 px-2 py-2">
@@ -223,8 +226,8 @@
 {/if}
 
 {#if detailsVisible}
-	<div class="absolute inset-0 z-30 flex items-center justify-center bg-[#00000080]">
-		<div class="flex flex-col bg-white">
+	<div class="fixed inset-0 z-30 flex items-center justify-center bg-[#00000080]">
+		<div class="flex max-h-[90vh] flex-col overflow-y-auto bg-white">
 			<div class="flex max-h-150 min-w-80 flex-col rounded bg-white px-5 py-10 text-black">
 				<p class="text-lg font-bold">Team Leader:</p>
 				<p>{event.teamLead?.name}</p>
