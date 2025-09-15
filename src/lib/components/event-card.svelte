@@ -30,6 +30,7 @@
 	} = $props();
 
 	let qrVisible = $state(false);
+	let detailsVisible = $state(false);
 	let qrCodeDataUrl = $state('');
 	let ticketRef = $state<HTMLElement | null>(null);
 	let copied = $state(false);
@@ -53,6 +54,10 @@
 		});
 
 		qrVisible = true;
+	}
+
+	function showDetails() {
+		detailsVisible = true;
 	}
 
 	async function downloadTicket() {
@@ -110,7 +115,9 @@
 	<div class="flex flex-col items-center p-4">
 		<div class="w-full">
 			<h3 class="text-lg font-bold text-gray-800">{event.name}</h3>
-			<p class="mb-2 text-sm text-gray-400">{event.description}</p>
+			{#if details.status !== 'myevent'}
+				<p class="mb-2 text-sm text-gray-400">{event.description}</p>
+			{/if}
 			<p class="text-sm text-gray-600">{event.venue}</p>
 		</div>
 		{#if details?.status === 'upcoming'}
@@ -122,13 +129,14 @@
 				disabled={!enableRegister()}>Register</button
 			>
 		{:else if details?.status === 'myevent'}
-			<div class="flex w-full flex-col items-center justify-center max-sm:flex-col">
+			<div class="flex w-full flex-col items-center justify-center text-black max-sm:flex-col">
 				{#if !details.isCertificateAvailable}
 					<!-- Before event ends → show team code -->
 					{#if event.teamCode}
+						<p class="mt-2 w-full">Team Name: <span class="font-bold">{event.teamName}</span></p>
 						<button
 							onclick={copyTeamCode}
-							class="pointer-cursor mt-2 flex w-full cursor-pointer items-center justify-between justify-start gap-x-3 py-2 text-black"
+							class="pointer-cursor flex w-full cursor-pointer items-center justify-between justify-start gap-x-3 py-2 text-black"
 						>
 							<p>
 								Team Code:
@@ -136,6 +144,11 @@
 							</p>
 							<CopyIcon size="20" />
 						</button>
+						<button
+							onclick={showDetails}
+							class="mt-2 w-full cursor-pointer bg-[#BFBFBF] p-2 text-black hover:bg-black hover:text-white"
+							>View Details</button
+						>
 					{/if}
 					<button
 						onclick={showTicketQR}
@@ -200,6 +213,31 @@
 				</button>
 				<button
 					onclick={() => (qrVisible = false)}
+					class="w-full cursor-pointer bg-[#BFBFBF] p-2 text-black hover:bg-black hover:text-white"
+				>
+					Close
+				</button>
+			</div>
+		</div>
+	</div>
+{/if}
+
+{#if detailsVisible}
+	<div class="absolute inset-0 z-30 flex items-center justify-center bg-[#00000080]">
+		<div class="flex flex-col bg-white">
+			<div class="flex max-h-150 min-w-80 flex-col rounded bg-white px-5 py-10 text-black">
+				<p class="text-lg font-bold">Team Leader:</p>
+				<p>{event.teamLead?.name}</p>
+				<p class="mt-5 text-lg font-bold">Team Members:</p>
+				<ol class="ml-8 list-decimal">
+					{#each event.teamMembers! as member}
+						<li>{member.name}</li>
+					{/each}
+				</ol>
+			</div>
+			<div class="flex gap-x-2 px-2 py-2">
+				<button
+					onclick={() => (detailsVisible = false)}
 					class="w-full cursor-pointer bg-[#BFBFBF] p-2 text-black hover:bg-black hover:text-white"
 				>
 					Close

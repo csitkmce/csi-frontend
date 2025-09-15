@@ -34,6 +34,11 @@ export type UserDataRow = {
 	role: string;
 };
 
+export type TeamMember = {
+	id: string;
+	name: string;
+};
+
 export type Event = {
 	id: number;
 	name: string;
@@ -65,7 +70,7 @@ export type Event = {
 		id: string;
 		name: string;
 	};
-	teamMembers?: [];
+	teamMembers?: TeamMember[];
 	isTeamLead?: boolean;
 	currentMembers?: number;
 	maxRegistrations?: number;
