@@ -7,12 +7,22 @@
 	const {
 		event,
 		details = {
+			name: 'Unknown',
+			email: 'Unknown',
+			department: 'Unknown',
+			batch: 'Unknown',
+			graduationYear: 'Unknown',
 			status: 'past',
 			isCertificateAvailable: false
 		}
 	}: {
 		event: Event;
 		details?: {
+			name: string;
+			email: string;
+			department: string;
+			batch: string;
+			graduationYear: string;
 			status: 'upcoming' | 'ongoing' | 'past' | 'myevent';
 			isCertificateAvailable?: boolean;
 		};
@@ -143,11 +153,14 @@
 				class="flex max-h-150 min-w-80 flex-col rounded bg-white px-5 py-10 text-black"
 				bind:this={ticketRef}
 			>
-				<h2 class="mb-10 w-full text-center text-2xl font-bold">{event.name}</h2>
+				<h2 class="mb-10 w-full text-center text-2xl font-bold uppercase">{event.name}</h2>
 				<p class="text-lg">Date: <span class="font-bold">{event.eventStartDate}</span></p>
-				<p>Location: {event.venue}</p>
-				<p>Name:</p>
-				<p>Email:</p>
+				<p>Venue: <span class="font-bold">{event.venue}</span></p>
+				<p>Name: <span class="font-bold">{details.name}</span></p>
+				<p>Email: <span class="font-bold">{details.email}</span></p>
+				<p>Department: <span class="font-bold">{details.department}</span></p>
+				<p>Batch: <span class="font-bold">{details.batch}</span></p>
+				<p>Batch Year: <span class="font-bold">{details.graduationYear}</span></p>
 				{#if event.teamCode}
 					<p class="my-10 w-full text-center font-bold uppercase">Team Code: {event.teamCode}</p>
 				{/if}

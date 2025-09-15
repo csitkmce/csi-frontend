@@ -89,7 +89,14 @@ export type LeaderBoard = {
 };
 
 export type ExecomList = Record<string, ExecomMember[]>;
-export type EventList = Record<string, Event[]>;
+export type EventList = {
+	name: string;
+	email: string;
+	department: string;
+	batch: string;
+	graduationYear: string;
+	events: Event[];
+};
 
 export type LoadedData<T> = LoadingPending | LoadingSuccess<T> | LoadingFailure;
 
