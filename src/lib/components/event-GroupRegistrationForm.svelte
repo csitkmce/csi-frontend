@@ -4,8 +4,7 @@
 	import type { Event, User } from '$lib/types';
 	import { onMount } from 'svelte';
 
-	export let event: Event;
-	export let user: User;
+	let { event, user }: { event: Event; user: User } = $props();
 
 	let isCreate = $state(true);
 	let teamName = $state('');
