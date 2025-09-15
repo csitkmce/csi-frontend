@@ -137,7 +137,7 @@
 							<option>{batch}</option>
 						{/each}
 					</select>
-					<p class="text-md w-fit">Year</p>
+					<p class="text-md w-fit">Graduation Year</p>
 					<input
 						name="year"
 						class="h-8 w-full rounded-xs border-1 border-black p-2 {errorField === 'phone_number'
