@@ -14,8 +14,11 @@
 	let success = $state('');
 	let teamMembers = $state<{ name: string; email: string }[]>([]);
 	let accList = $state<{ accommodation_id: number; accommodation: string }[]>([]);
+	const foodOptions = ['Non-Veg', 'Veg'];
 	let selecteCreateAcc = $state<number | null>(null);
 	let selecteJoinAcc = $state<number | null>(null);
+	let selectedCreateFoodOpt = $state<number | null>(null);
+	let selectedJoinFoodOpt = $state<number | null>(null);
 
 	onMount(async () => {
 		try {
@@ -53,14 +56,20 @@
 
 		const endpoint = isCreate ? '/api/register' : '/api/register/join-team';
 		const body = isCreate
-			? { eventId: event.id, teamName, accommodationId: selecteCreateAcc }
-			: { eventId: event.id, teamCode, accommodationId: selecteJoinAcc };
+			? {
+					eventId: event.id,
+					teamName,
+					accommodationId: selecteCreateAcc,
+					foodOption: selectedCreateFoodOpt
+				}
+			: {
+					eventId: event.id,
+					teamCode,
+					accommodationId: selecteJoinAcc,
+					foodOption: selectedJoinFoodOpt
+				};
 
 		if ((!selecteCreateAcc && isCreate) || (!selecteJoinAcc && !isCreate)) {
-			console.log('selectedJoinAcc: ', selecteCreateAcc);
-			console.log('not isCreate: ', isCreate);
-			console.log('selectedCreateAcc: ', selecteJoinAcc);
-			console.log('isCreate: ', !isCreate);
 			error = 'Enter valid hostel info';
 			loading = false;
 			return;
@@ -196,6 +205,17 @@
 							<option value={acc.accommodation_id}>{acc.accommodation}</option>
 						{/each}
 					</select>
+					<label for="teamName" class="mt-4 mb-2">Food option:</label>
+					<select
+						id="accOptions"
+						bind:value={selectedCreateFoodOpt}
+						name="department"
+						class="flex h-8 w-full items-center rounded bg-[#505050]"
+					>
+						{#each foodOptions as option}
+							<option value={option}>{option}</option>
+						{/each}
+					</select>
 				</div>
 				<div class="flex w-full items-center justify-center">
 					<button
@@ -242,6 +262,17 @@
 					>
 						{#each accList as acc}
 							<option value={acc.accommodation_id}>{acc.accommodation}</option>
+						{/each}
+					</select>
+					<label for="teamName" class="mt-4 mb-2">Food option:</label>
+					<select
+						id="accOptions"
+						bind:value={selectedJoinFoodOpt}
+						name="department"
+						class="flex h-8 w-full items-center rounded bg-[#505050]"
+					>
+						{#each foodOptions as option}
+							<option value={option}>{option}</option>
 						{/each}
 					</select>
 				</div>
