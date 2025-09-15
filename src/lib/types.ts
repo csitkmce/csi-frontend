@@ -51,16 +51,25 @@ export type Event = {
 	regEndDate: string;
 	regEndTime: string;
 	durationDays: number;
-	fee: string;
+	fee: number;
 	food: string;
 	team: {
 		min: number;
 		max: number;
 	};
+	teamId?: string;
+	teamName?: string;
 	teamCode?: string;
+	teamLead?: {
+		id: string;
+		name: string;
+	};
+	teamMembers?: [];
+	isTeamLead?: boolean;
+	currentMembers?: number;
 	maxRegistrations?: number;
-  	whatsappLink?: string;	
-	certificateUrl?: string;
+	whatsapp?: string;
+	certificate?: string;
 };
 
 export type ExecomMember = {

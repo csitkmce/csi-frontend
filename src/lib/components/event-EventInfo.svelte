@@ -1,5 +1,7 @@
 <script lang="ts">
-	export let event: any;
+	import type { Event } from '$lib/types';
+
+	export let event: Event;
 	export let posterUrl: string = '';
 </script>
 
@@ -23,18 +25,18 @@
 		<div class="mt-4 space-y-1 text-white">
 			<p>Venue: {event.venue || 'TBA'}</p>
 			<p>Fee: {event.fee > 0 ? `₹${event.fee}` : 'Free'}</p>
-			<!-- <p>Team size: {event.team.min} – {event.team.max}</p> -->
+			<p>Team size: {event.team.min} – {event.team.max}</p>
 			<p>
-				Registration: {new Date(event.regStart).toLocaleString()} – {new Date(
-					event.regEnd
+				Registration: {new Date(event.regStartDate).toLocaleString()} – {new Date(
+					event.regEndDate
 				).toLocaleString()}
 			</p>
-			{#if event.whatsappLink}
-				<a class="text-blue-400 underline" href={event.whatsappLink} target="_blank">
+			{#if event.whatsapp}
+				<a class="text-blue-400 underline" href={event.whatsapp} target="_blank">
 					Join WhatsApp Group
 				</a>
 			{/if}
-			<p>{event.food ? '🍴 Food provided' : 'No food'}</p>
+			<p>{event.food ? 'Food provided' : ''}</p>
 		</div>
 	</div>
 </div>

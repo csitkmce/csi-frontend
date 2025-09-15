@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import type { Event } from '$lib/types';
+	import QRCode from 'qrcode';
+	import html2canvas from 'html2canvas';
 
 	const {
 		event,
@@ -16,6 +18,10 @@
 		};
 	} = $props();
 
+	let qrVisible = $state(false);
+	let qrCodeDataUrl = $state('');
+	let ticketRef = $state<HTMLElement | null>(null);
+
 	function enableRegister() {
 		return !(event.isRegistrationFull || !event.regOpen);
 	}
@@ -23,6 +29,28 @@
 	function gotoPage() {
 		const link = event.team.max > 1 ? `/events/${event.id}` : `/events/${event.id}`;
 		goto(link);
+	}
+
+	async function showTicketQR() {
+		const customCode = event.teamCode ?? `${event.id}-ticket`;
+
+		qrCodeDataUrl = await QRCode.toDataURL(customCode, {
+			width: 200,
+			margin: 2,
+			color: { dark: '#000000', light: '#ffffff' }
+		});
+
+		qrVisible = true;
+	}
+
+	async function downloadTicket() {
+		if (!ticketRef) return;
+		const canvas = await html2canvas(ticketRef);
+		const dataUrl = canvas.toDataURL('image/png');
+		const link = document.createElement('a');
+		link.href = dataUrl;
+		link.download = `${event.name}-ticket.png`;
+		link.click();
 	}
 </script>
 
@@ -75,6 +103,7 @@
 				{#if !details.isCertificateAvailable}
 					<!-- Before event ends → show team code -->
 					<button
+						onclick={showTicketQR}
 						class="mt-2 w-full cursor-pointer bg-[#BFBFBF] p-2 text-black hover:bg-black hover:text-white"
 						>Ticket</button
 					>
@@ -105,3 +134,43 @@
 		</p>
 	</div>
 </div>
+
+<!-- Ticket popup -->
+{#if qrVisible}
+	<div class="absolute inset-0 z-30 flex items-center justify-center bg-[#00000080]">
+		<div class="flex flex-col bg-white">
+			<div
+				class="flex max-h-150 min-w-80 flex-col rounded bg-white px-5 py-10 text-black"
+				bind:this={ticketRef}
+			>
+				<h2 class="mb-10 w-full text-center text-2xl font-bold">{event.name}</h2>
+				<p class="text-lg">Date: <span class="font-bold">{event.eventStartDate}</span></p>
+				<p>Location: {event.venue}</p>
+				<p>Name:</p>
+				<p>Email:</p>
+				{#if event.teamCode}
+					<p class="my-10 w-full text-center font-bold uppercase">Team Code: {event.teamCode}</p>
+				{/if}
+				{#if qrCodeDataUrl}
+					<div class="flex w-full justify-center">
+						<img class="max-w-60" src={qrCodeDataUrl} alt="QR Code" />
+					</div>
+				{/if}
+			</div>
+			<div class="flex gap-x-2 px-2 pb-2">
+				<button
+					onclick={downloadTicket}
+					class="w-full cursor-pointer bg-[#BFBFBF] p-2 text-black hover:bg-black hover:text-white"
+				>
+					Download
+				</button>
+				<button
+					onclick={() => (qrVisible = false)}
+					class="w-full cursor-pointer bg-[#BFBFBF] p-2 text-black hover:bg-black hover:text-white"
+				>
+					Close
+				</button>
+			</div>
+		</div>
+	</div>
+{/if}

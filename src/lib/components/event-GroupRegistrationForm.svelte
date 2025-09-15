@@ -51,16 +51,20 @@
 			return;
 		}
 
-		if ((!selecteCreateAcc && isCreate) || (!selecteJoinAcc && !isCreate)) {
-			error = 'Enter valid hostel info';
-			loading = false;
-			return;
-		}
-
 		const endpoint = isCreate ? '/api/register' : '/api/register/join-team';
 		const body = isCreate
 			? { eventId: event.id, teamName, accommodationId: selecteCreateAcc }
 			: { eventId: event.id, teamCode, accommodationId: selecteJoinAcc };
+
+		if ((!selecteCreateAcc && isCreate) || (!selecteJoinAcc && !isCreate)) {
+			console.log('selectedJoinAcc: ', selecteCreateAcc);
+			console.log('not isCreate: ', isCreate);
+			console.log('selectedCreateAcc: ', selecteJoinAcc);
+			console.log('isCreate: ', !isCreate);
+			error = 'Enter valid hostel info';
+			loading = false;
+			return;
+		}
 
 		try {
 			const res = await fetch(`${PUBLIC_API_URL}${endpoint}`, {
@@ -232,7 +236,7 @@
 					<label for="teamName" class="mt-4 mb-2">Hostel Information:</label>
 					<select
 						id="accJoinOptions"
-						bind:value={selecteCreateAcc}
+						bind:value={selecteJoinAcc}
 						name="department"
 						class="flex h-8 w-full items-center rounded bg-[#505050]"
 					>
