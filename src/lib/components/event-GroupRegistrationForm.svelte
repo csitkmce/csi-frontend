@@ -60,13 +60,13 @@
 					eventId: event.id,
 					teamName,
 					accommodationId: selecteCreateAcc,
-					foodOption: selectedCreateFoodOpt
+					foodPref: selectedCreateFoodOpt
 				}
 			: {
 					eventId: event.id,
 					teamCode,
 					accommodationId: selecteJoinAcc,
-					foodOption: selectedJoinFoodOpt
+					foodPref: selectedJoinFoodOpt
 				};
 
 		if ((!selecteCreateAcc && isCreate) || (!selecteJoinAcc && !isCreate)) {
