@@ -204,7 +204,7 @@
 				<div class="m-4 border-1 border-[#181818] p-4 shadow-[4px_4px_0_0_[#181818]]">
 					<h2 class="text-2xl">My Events</h2>
 					{#if myEvents.data.events.length < 0}
-						<div class="flex min-h-100 items-center justify-center">
+						<div class="flex h-full min-h-100 items-center justify-center">
 							<p class="text-lg">No registered events</p>
 						</div>
 					{:else}
