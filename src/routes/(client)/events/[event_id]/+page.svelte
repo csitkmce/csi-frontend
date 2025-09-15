@@ -49,7 +49,7 @@
 	class="flex min-h-screen w-full max-w-7xl items-center border-x border-black bg-[#222222] max-md:flex-col"
 >
 	{#if event && user}
-		<div class="flex w-full flex-col items-center p-4">
+		<div class="flex w-full flex-col items-center p-4 min-md:h-min">
 			<EventInfo {event} {posterUrl} />
 		</div>
 

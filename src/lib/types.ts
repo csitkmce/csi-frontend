@@ -46,9 +46,9 @@ export type Event = {
 	eventEndTime: string;
 	regOpen: boolean;
 	isRegistrationFull: boolean;
-	regStartDate: string;
+	regStart: string;
 	regStartTime: string;
-	regEndDate: string;
+	regEnd: string;
 	regEndTime: string;
 	durationDays: number;
 	fee: number;

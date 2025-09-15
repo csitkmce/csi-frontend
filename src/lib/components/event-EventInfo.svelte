@@ -3,12 +3,26 @@
 
 	export let event: Event;
 	export let posterUrl: string = '';
+
+	function formatDate(dateStr: string | null | undefined) {
+		if (!dateStr) return 'TBA';
+		const d = new Date(dateStr);
+		return isNaN(d.getTime()) ? 'TBA' : d.toLocaleDateString();
+	}
+
+	function formatTime(dateStr: string | null | undefined) {
+		if (!dateStr) return '';
+		const d = new Date(dateStr);
+		return isNaN(d.getTime())
+			? ''
+			: d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+	}
 </script>
 
 <div
-	class="flex min-h-screen w-full max-w-7xl items-center border-x-1 border-black bg-[#222222] max-md:flex-col"
+	class="flex w-full max-w-7xl items-center border-black bg-[#222222] max-md:h-full max-md:flex-col min-md:border-r-1"
 >
-	<div class="flex w-full flex-col items-center p-4">
+	<div class="flex w-full flex-col items-center p-4 min-md:justify-start">
 		{#if posterUrl}
 			<img
 				src={posterUrl}
@@ -22,14 +36,12 @@
 			{event.description}
 		</p>
 
-		<div class="mt-4 space-y-1 text-white">
+		<div class="mt-4 space-y-2 text-white">
 			<p>Venue: {event.venue || 'TBA'}</p>
 			<p>Fee: {event.fee > 0 ? `₹${event.fee}` : 'Free'}</p>
 			<p>Team size: {event.team.min} – {event.team.max}</p>
 			<p>
-				Registration: {new Date(event.regStartDate).toLocaleString()} – {new Date(
-					event.regEndDate
-				).toLocaleString()}
+				Registration: {formatDate(event.regStart)} – {formatDate(event.regEnd)}
 			</p>
 			{#if event.whatsapp}
 				<a class="text-blue-400 underline" href={event.whatsapp} target="_blank">
