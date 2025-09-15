@@ -204,7 +204,7 @@
 		<div class="flex w-full max-w-7xl flex-col justify-center border-x-1 border-[#181818] p-4">
 			<div class="min-sm:flex">
 				<div class="flex flex-col justify-center">
-					<img class="h-20 w-30 text-white" src="/images/csi_logo.png" alt="organisation" />
+					<img class="w-30 text-white" src="/images/csi_logo.png" alt="organisation" />
 				</div>
 				<div class="flex w-full items-end justify-end gap-4 p-5 max-sm:justify-start">
 					<div class="rounded bg-[#444444] p-1">

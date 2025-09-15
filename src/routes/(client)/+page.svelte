@@ -231,7 +231,7 @@
 					{/if}
 				</div>
 			{:else if myEvents.state === 'failed'}
-				Someting went wrong
+				Someting went wrong. Please reload the page
 			{/if}
 		</section>
 	{/if}

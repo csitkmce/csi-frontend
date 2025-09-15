@@ -3,6 +3,7 @@
 	import type { Event } from '$lib/types';
 	import QRCode from 'qrcode';
 	import html2canvas from 'html2canvas';
+	import { CopyIcon } from '@lucide/svelte';
 
 	const {
 		event,
@@ -31,6 +32,7 @@
 	let qrVisible = $state(false);
 	let qrCodeDataUrl = $state('');
 	let ticketRef = $state<HTMLElement | null>(null);
+	let copied = $state(false);
 
 	function enableRegister() {
 		return !(event.isRegistrationFull || !event.regOpen);
@@ -61,6 +63,17 @@
 		link.href = dataUrl;
 		link.download = `${event.name}-ticket.png`;
 		link.click();
+	}
+
+	async function copyTeamCode() {
+		if (event.teamCode) {
+			await navigator.clipboard.writeText(event.teamCode);
+			copied = false; // reset to re-trigger animation
+			requestAnimationFrame(() => {
+				copied = true;
+			});
+			setTimeout(() => (copied = false), 2000); // remove after animation ends
+		}
 	}
 </script>
 
@@ -112,18 +125,23 @@
 			<div class="flex w-full flex-col items-center justify-center max-sm:flex-col">
 				{#if !details.isCertificateAvailable}
 					<!-- Before event ends → show team code -->
+					{#if event.teamCode}
+						<button
+							onclick={copyTeamCode}
+							class="pointer-cursor mt-2 flex w-full cursor-pointer items-center justify-between justify-start gap-x-3 py-2 text-black"
+						>
+							<p>
+								Team Code:
+								<span class="font-bold {copied ? 'animate-copy' : ''}">{event.teamCode}</span>
+							</p>
+							<CopyIcon size="20" />
+						</button>
+					{/if}
 					<button
 						onclick={showTicketQR}
 						class="mt-2 w-full cursor-pointer bg-[#BFBFBF] p-2 text-black hover:bg-black hover:text-white"
 						>Ticket</button
 					>
-					{#if event.teamCode}
-						<button
-							class="mt-2 w-full cursor-pointer bg-[#BFBFBF] p-2 text-black hover:bg-black hover:text-white"
-						>
-							Team Code: {event.teamCode}
-						</button>
-					{/if}
 				{:else}
 					<!-- After event ends → show certificate -->
 					<button
@@ -162,7 +180,10 @@
 				<p>Batch: <span class="font-bold">{details.batch}</span></p>
 				<p>Batch Year: <span class="font-bold">{details.graduationYear}</span></p>
 				{#if event.teamCode}
-					<p class="my-10 w-full text-center font-bold uppercase">Team Code: {event.teamCode}</p>
+					<p class="my-10 w-full text-center font-bold uppercase">
+						Team Code: <span class="font-bold {copied ? 'animate-copy' : ''}">{event.teamCode}</span
+						>
+					</p>
 				{/if}
 				{#if qrCodeDataUrl}
 					<div class="flex w-full justify-center">
@@ -170,7 +191,7 @@
 					</div>
 				{/if}
 			</div>
-			<div class="flex gap-x-2 px-2 pb-2">
+			<div class="flex gap-x-2 px-2 py-2">
 				<button
 					onclick={downloadTicket}
 					class="w-full cursor-pointer bg-[#BFBFBF] p-2 text-black hover:bg-black hover:text-white"

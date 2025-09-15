@@ -4,30 +4,45 @@
 @import '../static/fonts/font.css';
 
 @theme {
-    --font-mono: "Space Mono", monospace;
-    --breakpoint-6xl: 72rem;
-    --breakpoint-7xl: 102rem;
+	--font-mono: 'Space Mono', monospace;
+	--breakpoint-6xl: 72rem;
+	--breakpoint-7xl: 102rem;
 }
 
 .marquee-container {
-    overflow: hidden;
-    white-space: nowrap;
-    width: 100%;
-    position: relative;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 100%;
+	position: relative;
 }
 
 .marquee-track {
-    display: inline-block;
-    white-space: nowrap;
-    animation: scroll-left 30s linear infinite;
+	display: inline-block;
+	white-space: nowrap;
+	animation: scroll-left 30s linear infinite;
+}
+
+.animate-copy {
+	display: inline-block;
+	white-space: nowrap;
+	animation: copyanimate 2s linear;
 }
 
 @keyframes scroll-left {
-    0% {
-        transform: translateX(0%);
-    }
+	0% {
+		transform: translateX(0%);
+	}
 
-    100% {
-        transform: translateX(-50%);
-    }
+	100% {
+		transform: translateX(-50%);
+	}
+}
+
+@keyframes copyanimate {
+	from {
+		color: #008cff;
+	}
+	to {
+		color: #707070;
+	}
 }
