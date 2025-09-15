@@ -4,7 +4,8 @@
 	import type { Event, User } from '$lib/types';
 	import { onMount } from 'svelte';
 
-	let { event, user } = $props<{ event: Event; user: User }>();
+	export let event: Event;
+	export let user: User;
 
 	let isCreate = $state(true);
 	let teamName = $state('');
@@ -205,17 +206,19 @@
 							<option value={acc.accommodation_id}>{acc.accommodation}</option>
 						{/each}
 					</select>
-					<label for="teamName" class="mt-4 mb-2">Food option:</label>
-					<select
-						id="accOptions"
-						bind:value={selectedCreateFoodOpt}
-						name="department"
-						class="flex h-8 w-full items-center rounded bg-[#505050]"
-					>
-						{#each foodOptions as option}
-							<option value={option}>{option}</option>
-						{/each}
-					</select>
+					{#if event.food}
+						<label for="teamName" class="mt-4 mb-2">Food option:</label>
+						<select
+							id="accOptions"
+							bind:value={selectedCreateFoodOpt}
+							name="department"
+							class="flex h-8 w-full items-center rounded bg-[#505050]"
+						>
+							{#each foodOptions as option}
+								<option value={option}>{option}</option>
+							{/each}
+						</select>
+					{/if}
 				</div>
 				<div class="flex w-full items-center justify-center">
 					<button
@@ -264,17 +267,19 @@
 							<option value={acc.accommodation_id}>{acc.accommodation}</option>
 						{/each}
 					</select>
-					<label for="teamName" class="mt-4 mb-2">Food option:</label>
-					<select
-						id="accOptions"
-						bind:value={selectedJoinFoodOpt}
-						name="department"
-						class="flex h-8 w-full items-center rounded bg-[#505050]"
-					>
-						{#each foodOptions as option}
-							<option value={option}>{option}</option>
-						{/each}
-					</select>
+					{#if event.food}
+						<label for="teamName" class="mt-4 mb-2">Food option:</label>
+						<select
+							id="accOptions"
+							bind:value={selectedJoinFoodOpt}
+							name="department"
+							class="flex h-8 w-full items-center rounded bg-[#505050]"
+						>
+							{#each foodOptions as option}
+								<option value={option}>{option}</option>
+							{/each}
+						</select>
+					{/if}
 				</div>
 
 				<div class="mt-8 w-full px-2">
