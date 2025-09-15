@@ -42,7 +42,7 @@
 	}
 
 	async function showTicketQR() {
-		const customCode = event.teamCode ?? `${event.id}-ticket`;
+		const customCode = event.registrationId ?? `null`;
 
 		qrCodeDataUrl = await QRCode.toDataURL(customCode, {
 			width: 200,

@@ -57,6 +57,7 @@ export type Event = {
 		min: number;
 		max: number;
 	};
+	registrationId?: string;
 	teamId?: string;
 	teamName?: string;
 	teamCode?: string;
