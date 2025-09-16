@@ -45,12 +45,12 @@ function formatTimeUTC(dateStr: string | null | undefined) {
 			<p>
 				Event: {formatDateUTC(event.eventStart)} - {formatDateUTC(event.eventEnd)}
 			</p>
-			{#if event.whatsapp}
+			<p>{event.food ? 'Food provided' : ''}</p>
+   {#if event.whatsapp}
 				<a class="text-blue-400 underline" href={event.whatsapp} target="_blank">
 					Join WhatsApp Group
 				</a>
 			{/if}
-			<p>{event.food ? 'Food provided' : ''}</p>
 		</div>
 	</div>
 </div>
