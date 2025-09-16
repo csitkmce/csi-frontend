@@ -41,7 +41,7 @@
 			<p>Fee: {event.fee > 0 ? `₹${event.fee}` : 'Free'}</p>
 			<p>Team size: {event.team.min} – {event.team.max}</p>
 			<p>
-				Event: {formatDate(event.eventStartDate)} – {formatDate(event.eventEndDate)}
+				Event: {event.eventStartDate – event.eventEndDate}
 			</p>
 			{#if event.whatsapp}
 				<a class="text-blue-400 underline" href={event.whatsapp} target="_blank">
