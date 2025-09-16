@@ -22,6 +22,7 @@
 		if ($isLoggedin) {
 			isLoggedin.set(false);
 			localStorage.removeItem('accessToken');
+			await goto('/');
 		} else {
 			await goto('/login');
 		}
