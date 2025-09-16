@@ -45,8 +45,8 @@ export type Event = {
 	description: string;
 	image: string;
 	venue: string;
- eventStart?: string;
- eventEnd?: string;
+	eventStart?: string;
+	eventEnd?: string;
 	eventStartDate: string;
 	eventStartTime: string;
 	eventEndDate: string;
@@ -78,6 +78,7 @@ export type Event = {
 	maxRegistrations?: number;
 	whatsapp?: string;
 	certificate?: string;
+	isRegistered?: boolean;
 };
 
 export type ExecomMember = {
@@ -97,7 +98,8 @@ export type LeaderBoard = {
 };
 
 export type ExecomList = Record<string, ExecomMember[]>;
-export type EventList = {
+export type EventList = Record<string, Event[]>;
+export type EventData = {
 	name: string;
 	email: string;
 	department: string;

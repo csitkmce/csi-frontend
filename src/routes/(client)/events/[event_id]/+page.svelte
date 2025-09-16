@@ -18,10 +18,10 @@
 		const eventId = $page.params.event_id;
 		const accessToken = localStorage.getItem('accessToken');
 
-		if (!accessToken) {
-			goto('/login');
-			return;
-		}
+		// if (!accessToken) {
+		// 	goto('/login');
+		// 	return;
+		// }
 
 		try {
 			const res = await fetch(`${PUBLIC_API_URL}/api/events/${eventId}`, {
@@ -37,7 +37,9 @@
 			event = data.event;
 			user = data.user;
 			posterUrl = event!.image || '';
-			isLoggedin.set(true);
+			if (user) {
+				isLoggedin.set(true);
+			}
 		} catch (err: any) {
 			error = err.message;
 			console.error('Error fetching event details:', err);
@@ -48,7 +50,7 @@
 <div
 	class="flex min-h-screen w-full max-w-7xl items-center border-x border-black bg-[#222222] max-md:flex-col"
 >
-	{#if event && user}
+	{#if event}
 		<div class="flex w-full flex-col items-center p-4 min-md:h-min">
 			<EventInfo {event} {posterUrl} />
 		</div>

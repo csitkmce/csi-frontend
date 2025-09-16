@@ -19,11 +19,11 @@
 	}: {
 		event: Event;
 		details?: {
-			name: string;
-			email: string;
-			department: string;
-			batch: string;
-			graduationYear: string;
+			name?: string;
+			email?: string;
+			department?: string;
+			batch?: string;
+			graduationYear?: string;
 			status: 'upcoming' | 'ongoing' | 'past' | 'myevent';
 			isCertificateAvailable?: boolean;
 		};

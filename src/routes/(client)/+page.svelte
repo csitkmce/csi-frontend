@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import EventCard from '$lib/components/event-card.svelte';
-	import { type Event, type EventList, type LoadedData } from '$lib/types';
+	import { type Event, type EventData, type LoadedData } from '$lib/types';
 	import { Power } from '@lucide/svelte';
 	import { goto } from '$app/navigation';
 	import { isLoggedin } from '$lib/stores/auth.js';
@@ -14,7 +14,7 @@
 		isLightOn = !isLightOn;
 	}
 
-	let myEvents = $state<LoadedData<EventList>>({
+	let myEvents = $state<LoadedData<EventData>>({
 		state: 'pending',
 		message: 'Loading events list'
 	});
@@ -38,7 +38,7 @@
 					}
 					myEvents = {
 						state: 'success',
-						data: (await res.json()) as unknown as EventList
+						data: (await res.json()) as unknown as EventData
 					};
 				} catch (error) {
 					myEvents = {
