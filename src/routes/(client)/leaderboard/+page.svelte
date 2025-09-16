@@ -99,9 +99,13 @@
 				{/if}
 			</div>
 
-			<div class="overflow-auto border-t-1 border-[#181818]">
+			<div class="flex overflow-auto border-t-1 border-[#181818]">
 				{#if leaderboard.state === 'pending'}
-					Loading
+					<div class="m-4 flex w-full animate-pulse flex-col items-center overflow-hidden">
+						<div class="mb-4 flex h-10 w-full overflow-hidden bg-[#303030]"></div>
+						<div class="mb-4 flex h-10 w-full overflow-hidden bg-[#303030]"></div>
+						<div class="mb-4 flex h-10 w-full overflow-hidden bg-[#303030]"></div>
+					</div>
 				{:else if leaderboard.state === 'success'}
 					<table>
 						<thead>
