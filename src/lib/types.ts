@@ -45,6 +45,8 @@ export type Event = {
 	description: string;
 	image: string;
 	venue: string;
+ eventStart?: string;
+ eventEnd?: string;
 	eventStartDate: string;
 	eventStartTime: string;
 	eventEndDate: string;
