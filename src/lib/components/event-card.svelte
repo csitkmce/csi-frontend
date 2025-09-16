@@ -133,7 +133,6 @@
 				{#if !details.isCertificateAvailable}
 					<!-- Before event ends → show team code -->
 					{#if event.teamCode}
-						<p class="mt-2 w-full">Team Name: <span class="font-bold">{event.teamName}</span></p>
 						<button
 							onclick={copyTeamCode}
 							class="pointer-cursor flex w-full cursor-pointer items-center justify-between justify-start gap-x-3 py-2 text-black"
@@ -144,6 +143,15 @@
 							</p>
 							<CopyIcon size="20" />
 						</button>
+						{#if event.whatsapp}
+							<a
+								class="w-full font-bold text-blue-600 uppercase"
+								href={event.whatsapp}
+								target="_blank"
+							>
+								Join WhatsApp Group
+							</a>
+						{/if}
 						<button
 							onclick={showDetails}
 							class="mt-2 w-full cursor-pointer bg-[#BFBFBF] p-2 text-black hover:bg-black hover:text-white"
@@ -229,7 +237,11 @@
 	<div class="fixed inset-0 z-30 flex items-center justify-center bg-[#00000080]">
 		<div class="flex max-h-[90vh] flex-col overflow-y-auto bg-white">
 			<div class="flex max-h-150 min-w-80 flex-col rounded bg-white px-5 py-10 text-black">
-				<p class="text-lg font-bold">Team Leader:</p>
+				{#if event.teamCode}
+					<p class="text-lg font-bold">Team Name:</p>
+					<p>{event.teamName}</p>
+				{/if}
+				<p class="mt-5 text-lg font-bold">Team Leader:</p>
 				<p>{event.teamLead?.name}</p>
 				<p class="mt-5 text-lg font-bold">Team Members:</p>
 				<ol class="ml-8 list-decimal">

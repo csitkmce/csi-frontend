@@ -5,20 +5,18 @@
 	export let posterUrl: string = '';
 
 	function formatDateUTC(dateStr: string | null | undefined) {
-	if (!dateStr) return 'TBA';
-	const d = new Date(dateStr);
-	return isNaN(d.getTime())
-		? 'TBA'
-		: d.toLocaleDateString('en-GB', { timeZone: 'UTC' });
-}
+		if (!dateStr) return 'TBA';
+		const d = new Date(dateStr);
+		return isNaN(d.getTime()) ? 'TBA' : d.toLocaleDateString('en-GB', { timeZone: 'UTC' });
+	}
 
-function formatTimeUTC(dateStr: string | null | undefined) {
-	if (!dateStr) return '';
-	const d = new Date(dateStr);
-	return isNaN(d.getTime())
-		? ''
-		: d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' });
-}
+	function formatTimeUTC(dateStr: string | null | undefined) {
+		if (!dateStr) return '';
+		const d = new Date(dateStr);
+		return isNaN(d.getTime())
+			? ''
+			: d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' });
+	}
 </script>
 
 <div
@@ -46,11 +44,6 @@ function formatTimeUTC(dateStr: string | null | undefined) {
 				Event: {formatDateUTC(event.eventStart)} - {formatDateUTC(event.eventEnd)}
 			</p>
 			<p>{event.food ? 'Food provided' : ''}</p>
-   {#if event.whatsapp}
-				<a class="text-blue-400 underline" href={event.whatsapp} target="_blank">
-					Join WhatsApp Group
-				</a>
-			{/if}
 		</div>
 	</div>
 </div>
