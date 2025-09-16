@@ -99,7 +99,7 @@
 					</div>
 				</div>
 			{/if}
-			{#if !event.regOpen}
+			{#if event.regClosed}
 				<div class="marquee-container flex items-center bg-red-200 py-1">
 					<div class="marquee-track text-xs font-bold text-red-800">
 						<span>Registration Closed | </span>

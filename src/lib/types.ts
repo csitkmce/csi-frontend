@@ -52,6 +52,7 @@ export type Event = {
 	eventEndDate: string;
 	eventEndTime: string;
 	regOpen: boolean;
+	regClosed: boolean;
 	isRegistrationFull: boolean;
 	regStart: string;
 	regStartTime: string;
