@@ -48,8 +48,14 @@
 		error = '';
 		success = '';
 
-		if (teamName.trim() === '') {
+		if (teamName.trim() === '' && isCreate) {
 			error = 'Enter a valid a Team name';
+			loading = false;
+			return;
+		}
+
+		if (teamCode.trim() === '' && !isCreate) {
+			error = 'Enter a valid a Team code';
 			loading = false;
 			return;
 		}
