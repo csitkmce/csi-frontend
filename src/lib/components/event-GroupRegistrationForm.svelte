@@ -48,6 +48,12 @@
 		error = '';
 		success = '';
 
+		if (teamName.trim() === '') {
+			error = 'Enter a valid a Team name';
+			loading = false;
+			return;
+		}
+
 		const accessToken = localStorage.getItem('accessToken');
 		if (!accessToken) {
 			error = 'You must be logged in.';
