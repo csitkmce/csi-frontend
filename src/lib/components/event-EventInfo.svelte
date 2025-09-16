@@ -4,19 +4,21 @@
 	export let event: Event;
 	export let posterUrl: string = '';
 
-	function formatDate(dateStr: string | null | undefined) {
-		if (!dateStr) return 'TBA';
-		const d = new Date(dateStr);
-		return isNaN(d.getTime()) ? 'TBA' : d.toLocaleDateString();
-	}
+	function formatDateUTC(dateStr: string | null | undefined) {
+	if (!dateStr) return 'TBA';
+	const d = new Date(dateStr);
+	return isNaN(d.getTime())
+		? 'TBA'
+		: d.toLocaleDateString('en-GB', { timeZone: 'UTC' });
+}
 
-	function formatTime(dateStr: string | null | undefined) {
-		if (!dateStr) return '';
-		const d = new Date(dateStr);
-		return isNaN(d.getTime())
-			? ''
-			: d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-	}
+function formatTimeUTC(dateStr: string | null | undefined) {
+	if (!dateStr) return '';
+	const d = new Date(dateStr);
+	return isNaN(d.getTime())
+		? ''
+		: d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' });
+}
 </script>
 
 <div
@@ -41,7 +43,7 @@
 			<p>Fee: {event.fee > 0 ? `₹${event.fee}` : 'Free'}</p>
 			<p>Team size: {event.team.min} – {event.team.max}</p>
 			<p>
-				Event: {formatDate(event.eventStart)} - {formatDate(event.eventEnd)}
+				Event: {formatDateUTC(event.eventStart)} - {formatDateUTC(event.eventEnd)}
 			</p>
 			{#if event.whatsapp}
 				<a class="text-blue-400 underline" href={event.whatsapp} target="_blank">
