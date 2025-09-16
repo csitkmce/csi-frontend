@@ -26,7 +26,7 @@
 					<a href="/admin/dashboard">Manage Events</a>
 				</div>
 				<div class="flex items-center p-2">
-					<a href="/admin/dashboard">Manage Registration</a>
+					<a href="/admin/registrations">Manage Registration</a>
 				</div>
 			</div>
 		</div>
