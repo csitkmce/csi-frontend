@@ -90,7 +90,9 @@
 	>
 		<nav class="flex w-full max-w-7xl justify-between border-x-1 border-[#181818] p-5">
 			<div class="flex items-center gap-2">
-				<img class="w-20 text-white" src="/images/csi_logo.png" alt="organisation" />
+				<a href="/">
+					<img class="w-20 text-white" src="/images/csi_logo.png" alt="organisation" />
+				</a>
 			</div>
 			<div class="flex cursor-pointer items-center min-sm:hidden">
 				<button onclick={toggleMenu} aria-label="Toggle menu">
