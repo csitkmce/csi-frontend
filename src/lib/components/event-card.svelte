@@ -244,10 +244,13 @@
 				<p class="mt-5 text-lg font-bold">Team Leader:</p>
 				<p>{event.teamLead?.name}</p>
 				<p class="mt-5 text-lg font-bold">Team Members:</p>
-				<ol class="ml-8 list-decimal">
+				<ol class="list-decimal">
 					{#each event.teamMembers! as member}
-						<li>{member.name}</li>
+						<li class="ml-8">{member.name}</li>
 					{/each}
+					{#if event.teamMembers?.length === 0}
+						<p>No members</p>
+					{/if}
 				</ol>
 			</div>
 			<div class="flex gap-x-2 px-2 py-2">
