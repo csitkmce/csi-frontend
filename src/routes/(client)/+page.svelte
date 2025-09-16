@@ -199,11 +199,11 @@
 		</section>
 	{/if}
 	{#if $isLoggedin}
-		<section id="myevents" class="flex border-x-1 border-[#181818] p-4">
+		<section id="myevents" class="flex flex-col border-x-1 border-[#181818] p-4">
 			{#if myEvents.state === 'pending'}
 				<div class="m-4 flex w-full animate-pulse flex-col items-center overflow-hidden">
 					<div class="mb-4 flex h-10 w-full overflow-hidden bg-[#303030]"></div>
-					<div class="mb-4 flex h-40 w-full overflow-hidden bg-[#303030]"></div>
+					<div class="mb-4 flex h-600 w-full overflow-hidden bg-[#303030]"></div>
 				</div>
 			{:else if myEvents.state === 'success'}
 				<h3 class="m-4 w-full text-xl text-[#909090]">
