@@ -107,7 +107,7 @@
 						<div class="mb-4 flex h-10 w-full overflow-hidden bg-[#303030]"></div>
 					</div>
 				{:else if leaderboard.state === 'success'}
-					<table>
+					<table class="w-full">
 						<thead>
 							<tr>
 								<th scope="col" class="px-6">Rank</th>
