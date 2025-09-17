@@ -262,6 +262,10 @@
 							<button
 								onclick={async (e) => {
 									e.preventDefault();
+									if (!user) {
+										goto('/login');
+										return;
+									}
 									await checkTeam();
 								}}
 								class="h-8 cursor-pointer rounded bg-[#222222] px-3"
