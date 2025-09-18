@@ -34,6 +34,7 @@
 		const payload = {
 			name: formData.get('name'),
 			email: formData.get('email'),
+			college: formData.get('college'),
 			department: formData.get('department'),
 			batch: formData.get('batch'),
 			year: formData.get('year'),
@@ -45,6 +46,7 @@
 		const error = validateRegistration(
 			payload.name,
 			payload.email,
+			payload.college,
 			payload.department,
 			payload.batch,
 			payload.year,
@@ -112,6 +114,14 @@
 							? 'border-red-500'
 							: ''}"
 						type="email"
+					/>
+					<p class="text-md w-fit">College Name</p>
+					<input
+						name="college"
+						class="h-8 w-full rounded-xs border-1 border-black p-2 {errorField === 'college'
+							? 'border-red-500'
+							: ''}"
+						type="text"
 					/>
 					<p class="text-md w-fit">Branch</p>
 					<select
