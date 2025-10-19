@@ -143,20 +143,20 @@
 							</p>
 							<CopyIcon size="20" />
 						</button>
-						{#if event.whatsapp}
-							<a
-								class="w-full font-bold text-blue-600 uppercase"
-								href={event.whatsapp}
-								target="_blank"
-							>
-								Join WhatsApp Group
-							</a>
-						{/if}
 						<button
 							onclick={showDetails}
 							class="mt-2 w-full cursor-pointer bg-[#BFBFBF] p-2 text-black hover:bg-black hover:text-white"
 							>View Details</button
 						>
+					{/if}
+					{#if event.whatsapp}
+						<a
+							class="w-full font-bold text-blue-600 uppercase"
+							href={event.whatsapp}
+							target="_blank"
+						>
+							Join WhatsApp Group
+						</a>
 					{/if}
 					<button
 						onclick={showTicketQR}
