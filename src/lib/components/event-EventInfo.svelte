@@ -39,10 +39,15 @@
 		<div class="mt-4 space-y-2 text-white">
 			<p>Venue: {event.venue || 'TBA'}</p>
 			<p>Fee: {event.fee > 0 ? `₹${event.fee}` : 'Free'}</p>
-			<p>Team size: {event.team.min} – {event.team.max}</p>
-			<p>
-				Event: {formatDateUTC(event.eventStart)} - {formatDateUTC(event.eventEnd)}
-			</p>
+			{#if event.team.max !== 1}
+				<p>Team size: {event.team.min} – {event.team.max}</p>
+				<p>
+					Event: {formatDateUTC(event.eventStart)} - {formatDateUTC(event.eventEnd)}
+				</p>
+			{:else}
+				<p>Event: {formatDateUTC(event.eventStart)} {formatTimeUTC(event.eventStartTime)}</p>
+			{/if}
+
 			<p>{event.food ? 'Food provided' : ''}</p>
 		</div>
 	</div>
