@@ -211,10 +211,12 @@
 				</div>
 				<div class="flex w-full items-end justify-end gap-4 p-5 max-sm:justify-start">
 					<div class="rounded bg-[#444444] p-1">
-						<LinkedinIcon />
+						<a target="_blank" href="https://www.linkedin.com/company/csi-tkmce/"
+							><LinkedinIcon /></a
+						>
 					</div>
 					<div class="rounded bg-[#444444] p-1">
-						<InstagramIcon />
+						<a target="_blank" href="https://www.instagram.com/csi_tkmce/"><InstagramIcon /></a>
 					</div>
 					<div class="rounded bg-[#444444] p-1">
 						<MailIcon />
