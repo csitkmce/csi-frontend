@@ -104,7 +104,7 @@
 					</div>
 					<div class="w-full p-8 max-md:pt-0">
 						<h1 class="block text-3xl max-md:hidden">WELCOME TO CSI</h1>
-						<p class="mt-4 text-sm">
+						<p class="mt-4 text-justify font-sans text-sm">
 							The Computer Society of India (CSI) - TKMCE Chapter is a vibrant community of tech
 							enthusiasts, developers, and innovators at TKM College of Engineering. As a proud
 							extension of India’s premier body of IT professionals, we aim to nurture talent,
@@ -135,7 +135,7 @@
 				<div class="col-span-2 w-full"></div>
 				<div class="col-span-1 w-full"></div>
 				<div class="col-span-2 w-full bg-[#2D2D2D] px-10 py-4 text-4xl">
-					<p class="text-sm">
+					<p class="text-justify font-sans text-sm">
 						At CSI TKMCE, we’re not just coders we’re creators, dreamers, and doers. Our community
 						thrives on curiosity, teamwork, and innovation. We believe technology is more than just
 						code; it’s about solving problems, sparking creativity, and building connections. From
@@ -160,7 +160,7 @@
 			</div>
 			<div class="flex h-full w-full items-center justify-center p-5 max-md:flex-col-reverse">
 				<div class="my-4 flex w-full">
-					<p class="mx-2 w-full text-sm">
+					<p class="mx-2 w-full text-justify font-sans text-sm">
 						At CSI TKMCE, we organize events, workshops, and hackathons that bring out the best in
 						students. We create opportunities to learn the latest technologies, build projects, and
 						share ideas with peers. Our activities range from coding challenges to design sprints,
