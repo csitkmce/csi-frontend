@@ -28,7 +28,7 @@
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				credentials: 'include',
-				body: JSON.stringify({ email, password }),
+				body: JSON.stringify({ email, password })
 			});
 
 			const data = await res.json();
@@ -53,16 +53,23 @@
 <div class="flex min-h-screen w-full flex-col items-center bg-white p-10 text-black">
 	<h1 class="text-5xl text-[#222222]">WELCOME BACK</h1>
 	<div class="mt-10 min-w-sm border-1 border-black shadow-[4px_4px_0_0_black]">
-		<div class="flex w-full justify-between border-b-1 border-black">
+		<div class="flex w-full justify-between border-b-1 border-black bg-neutral-200">
 			<div class="flex items-center justify-center gap-4 p-4">
 				<div class="h-3 w-3 rounded-full bg-red-500"></div>
 				<div class="h-3 w-3 rounded-full bg-yellow-500"></div>
 				<div class="h-3 w-3 rounded-full bg-green-500"></div>
 			</div>
-			<h3 class="w-fit bg-[#BFBFBF] p-4">Login</h3>
+			<h3 class="//bg-[#BFBFBF] w-fit bg-neutral-300 p-4 text-neutral-400">Login</h3>
 		</div>
 		<form onsubmit={handleSubmit}>
 			<div class="flex w-full flex-col items-center p-4">
+				<div
+					class="{errorText
+						? 'visible'
+						: 'invisible'} mb-4 flex min-h-6 w-full items-center justify-start rounded bg-red-200 px-1"
+				>
+					<p class="text-sm text-red-500">{errorText}</p>
+				</div>
 				<div class="grid w-full auto-cols-fr grid-cols-[120px_auto] gap-5">
 					<p class="text-md w-fit">Email</p>
 					<input
@@ -81,20 +88,20 @@
 						type="password"
 					/>
 				</div>
-				<div class="mt-4 flex min-h-5 w-full items-center justify-start">
-					<p class="{errorText ? 'block' : 'hidden'} text-sm text-red-500">{errorText}</p>
-				</div>
 				<button
 					type="submit"
-					class="m-4 cursor-pointer border-1 border-black bg-[#D9D9D9] px-6 py-3 ease-in-out hover:bg-black hover:text-white"
+					class="m-4 mt-8 cursor-pointer border-1 border-black bg-[#D9D9D9] px-6 py-3 ease-in-out hover:bg-black hover:text-white"
 				>
 					Login
 				</button>
-				<div class="flex justify-center gap-2 text-sm">
-					<p>Don't have an account?</p>
-					<a class="text-[#008CFF]" href="/register">Register Here</a>
+				<div class="mt-2 flex w-full items-center justify-end">
+					<a class="text-sm text-[#008CFF]" href="">Forgot Password?</a>
 				</div>
 			</div>
 		</form>
+	</div>
+	<div class="mt-4 flex justify-center gap-2 text-sm">
+		<p>Don't have an account?</p>
+		<a class="text-[#008CFF]" href="/register">Register Here</a>
 	</div>
 </div>
