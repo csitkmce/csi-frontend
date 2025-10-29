@@ -48,3 +48,13 @@ export function validateLogin(email: unknown, password: unknown) {
 	}
 	return null;
 }
+
+export function validateEmail(email: unknown) {
+	if (typeof email !== 'string') {
+		return 'Invalid form data';
+	}
+	if (!email) {
+		return 'Please provide your email';
+	}
+	return null;
+}
