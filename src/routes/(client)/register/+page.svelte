@@ -101,15 +101,17 @@
 				<div
 					class="{errorText
 						? 'visible'
-						: 'invisible'} mb-4 flex min-h-6 w-full items-center justify-start rounded bg-red-200 px-1"
+						: 'invisible'} mb-4 flex min-h-6 w-full items-center justify-start rounded bg-red-200 px-1 font-sans"
 				>
 					<p class="text-sm text-red-500">{errorText}</p>
 				</div>
-				<div class="grid w-full auto-cols-fr grid-cols-[120px_auto] gap-5">
+				<div
+					class="//auto-cols-fr //grid-cols-[140px_auto] w-full place-items-start items-center gap-5"
+				>
 					<p class="text-md w-fit">Name</p>
 					<input
 						name="name"
-						class="h-8 w-full rounded-xs border-1 border-black p-2 {errorField === 'name'
+						class="mb-4 h-8 w-full rounded-xs border-1 border-black p-2 {errorField === 'name'
 							? 'border-red-500'
 							: ''}"
 						type="text"
@@ -117,7 +119,7 @@
 					<p class="text-md w-fit">Email</p>
 					<input
 						name="email"
-						class="h-8 w-full rounded-xs border-1 border-black p-2 {errorField === 'email'
+						class="mb-4 h-8 w-full rounded-xs border-1 border-black p-2 {errorField === 'email'
 							? 'border-red-500'
 							: ''}"
 						type="email"
@@ -125,7 +127,7 @@
 					<p class="text-md w-fit">College Name</p>
 					<input
 						name="college"
-						class="h-8 w-full rounded-xs border-1 border-black p-2 {errorField === 'college'
+						class="mb-4 h-8 w-full rounded-xs border-1 border-black p-2 {errorField === 'college'
 							? 'border-red-500'
 							: ''}"
 						type="text"
@@ -133,7 +135,7 @@
 					<p class="text-md w-fit">Branch</p>
 					<select
 						name="department"
-						class="flex h-8 w-full items-center rounded-xs border-1 border-black {errorField ===
+						class="mb-4 flex h-8 w-full items-center rounded-xs border-1 border-black {errorField ===
 						'department'
 							? 'border-red-500'
 							: ''}"
@@ -145,7 +147,7 @@
 					<p class="text-md w-fit">Batch</p>
 					<select
 						name="batch"
-						class="flex h-8 w-full items-center rounded-xs border-1 border-black {errorField ===
+						class="mb-4 flex h-8 w-full items-center rounded-xs border-1 border-black {errorField ===
 						'batch'
 							? 'border-red-500'
 							: ''}"
@@ -154,10 +156,11 @@
 							<option>{batch}</option>
 						{/each}
 					</select>
-					<p class="text-md w-fit">Graduation Year</p>
+					<p class="text-md w-max">Graduation Year</p>
 					<input
 						name="year"
-						class="h-8 w-full rounded-xs border-1 border-black p-2 {errorField === 'phone_number'
+						class="mb-4 h-8 w-full rounded-xs border-1 border-black p-2 {errorField ===
+						'phone_number'
 							? 'border-red-500'
 							: ''}"
 						type="number"
@@ -165,7 +168,8 @@
 					<p class="text-md w-fit">Phone</p>
 					<input
 						name="phone_number"
-						class="h-8 w-full rounded-xs border-1 border-black p-2 {errorField === 'phone_number'
+						class="mb-4 h-8 w-full rounded-xs border-1 border-black p-2 {errorField ===
+						'phone_number'
 							? 'border-red-500'
 							: ''}"
 						type="tel"
@@ -173,15 +177,15 @@
 					<p class="text-md w-fit">Password</p>
 					<input
 						name="password"
-						class="h-8 w-full rounded-xs border-1 border-black p-2 {errorField === 'password'
+						class="mb-4 h-8 w-full rounded-xs border-1 border-black p-2 {errorField === 'password'
 							? 'border-red-500'
 							: ''}"
 						type="password"
 					/>
-					<p class="text-md w-fit">Confirm Password</p>
+					<p class="text-md w-max">Confirm Password</p>
 					<input
 						name="confirm_password"
-						class="h-8 w-full rounded-xs border-1 border-black p-2 {errorField ===
+						class="mb-4 h-8 w-full rounded-xs border-1 border-black p-2 {errorField ===
 						'confirm_password'
 							? 'border-red-500'
 							: ''}"

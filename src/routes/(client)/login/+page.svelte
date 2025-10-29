@@ -66,15 +66,17 @@
 				<div
 					class="{errorText
 						? 'visible'
-						: 'invisible'} mb-4 flex min-h-6 w-full items-center justify-start rounded bg-red-200 px-1"
+						: 'invisible'} mb-4 flex min-h-6 w-full items-center justify-start rounded bg-red-200 px-1 font-sans"
 				>
 					<p class="text-sm text-red-500">{errorText}</p>
 				</div>
-				<div class="grid w-full auto-cols-fr grid-cols-[120px_auto] gap-5">
+				<div
+					class="//auto-cols-fr //grid-cols-[120px_auto] w-full place-items-start items-center gap-5"
+				>
 					<p class="text-md w-fit">Email</p>
 					<input
 						name="email"
-						class="h-8 w-full rounded-xs border-1 border-black p-2 {errorField === 'email'
+						class="mb-4 h-8 w-full rounded-xs border-1 border-black p-2 {errorField === 'email'
 							? 'border-red-500'
 							: ''}"
 						type="email"
@@ -82,7 +84,7 @@
 					<p class="text-md w-fit">Password</p>
 					<input
 						name="password"
-						class="h-8 w-full rounded-xs border-1 border-black p-2 {errorField === 'password'
+						class="mb-4 h-8 w-full rounded-xs border-1 border-black p-2 {errorField === 'password'
 							? 'border-red-500'
 							: ''}"
 						type="password"
