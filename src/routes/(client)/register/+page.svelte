@@ -85,8 +85,8 @@
 	};
 </script>
 
-<div class="flex min-h-screen w-full flex-col items-center bg-white p-10 text-black">
-	<h1 class="text-5xl text-[#222222]">WELCOME TO CSI</h1>
+<div class="flex min-h-screen w-full flex-col items-center bg-white p-10 text-sm text-black">
+	<h1 class="text-3xl text-[#222222]">WELCOME TO CSI</h1>
 	<div class="mt-10 min-w-sm border-1 border-black shadow-[4px_4px_0_0_black]">
 		<div class="flex w-full justify-between border-b-1 border-black bg-neutral-200">
 			<div class="flex items-center justify-center gap-4 p-4">

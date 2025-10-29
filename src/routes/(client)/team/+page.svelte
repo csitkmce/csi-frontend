@@ -31,7 +31,7 @@
 	<div
 		class="flex h-40 w-full max-w-7xl items-center justify-center border-x-1 border-b border-[#181818]"
 	>
-		<h1 class="text-5xl max-sm:text-4xl">MEET OUR TEAM</h1>
+		<h1 class="text-3xl">MEET OUR TEAM</h1>
 	</div>
 	{#if execomList.state === 'success'}
 		{#each Object.entries(execomList.data) as [section, members]}
@@ -40,7 +40,7 @@
 					<div
 						class="flex h-20 w-full max-w-7xl items-center justify-start border-x-1 border-[#181818]"
 					>
-						<h2 class="flex h-full items-center justify-center bg-black px-10 text-2xl">
+						<h2 class="flex h-full items-center justify-center bg-black px-10 text-3xl">
 							{section.toLocaleUpperCase()}
 						</h2>
 					</div>

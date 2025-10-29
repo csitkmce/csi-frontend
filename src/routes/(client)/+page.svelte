@@ -98,14 +98,12 @@
 				<div
 					class="min-lg:rounded-6xl flex items-center overflow-hidden rounded-4xl bg-[#2D2D2D] max-md:m-10 max-md:flex-col"
 				>
-					<h1 class="mt-8 hidden w-full text-center text-4xl max-md:block max-sm:text-3xl">
-						WELCOME TO CSI
-					</h1>
+					<h1 class="mt-8 hidden w-full text-center text-3xl max-md:block">WELCOME TO CSI</h1>
 					<div class="flex h-full w-full flex-col items-center justify-center min-xl:max-w-110">
 						<img src="/images/csi-home-illus.png" class="w-100" alt="" />
 					</div>
 					<div class="w-full p-8 max-md:pt-0">
-						<h1 class="block text-4xl max-md:hidden">WELCOME TO CSI</h1>
+						<h1 class="block text-3xl max-md:hidden">WELCOME TO CSI</h1>
 						<p class="mt-4 text-sm">
 							The Computer Society of India (CSI) - TKMCE Chapter is a vibrant community of tech
 							enthusiasts, developers, and innovators at TKM College of Engineering. As a proud
@@ -117,7 +115,7 @@
 							onclick={() => {
 								goto('/login');
 							}}
-							class="mt-10 cursor-pointer rounded-lg bg-[#008CFF] px-4 py-3"
+							class="mt-10 cursor-pointer rounded-lg bg-[#008CFF] px-4 py-3 text-sm"
 							>Ready to join CSI?</button
 						>
 					</div>
@@ -133,7 +131,7 @@
 			class="relative flex min-h-180 flex-col items-center border-1 border-[#181818] bg-[#222222]"
 		>
 			<div class="grid w-full grid-cols-3 border-y-1 border-[#181818] bg-[#1B1B1B]">
-				<div class="col-span-1 w-full bg-[#2D2D2D] px-10 py-4 text-4xl">WHO ARE WE?</div>
+				<div class="col-span-1 w-full bg-[#2D2D2D] px-10 py-4 text-3xl">WHO ARE WE?</div>
 				<div class="col-span-2 w-full"></div>
 				<div class="col-span-1 w-full"></div>
 				<div class="col-span-2 w-full bg-[#2D2D2D] px-10 py-4 text-4xl">
@@ -147,7 +145,7 @@
 				</div>
 			</div>
 			<div class="marquee-container my-4 flex items-center border-y-1 border-[#181818] p-5">
-				<div class="{isLightOn ? 'marquee-track' : ''} text-5xl font-bold text-[#2D2D2D]">
+				<div class="{isLightOn ? 'marquee-track' : ''} text-4xl font-bold text-[#2D2D2D]">
 					<span>WHAT DO WE DO?</span>
 					<span>WHAT DO WE DO?</span>
 					<span>WHAT DO WE DO?</span>
@@ -186,7 +184,7 @@
 			class="relative flex items-center justify-center border-x-1 border-[#181818] bg-[#22222] py-20"
 		>
 			<div class="relative z-10 text-center">
-				<h2 class="mb-12 text-2xl font-light tracking-wider max-md:w-80 md:text-3xl">
+				<h2 class="mb-12 text-3xl font-light tracking-wider max-md:w-80">
 					SO ARE YOU READY TO JOIN CSI?
 				</h2>
 				<button

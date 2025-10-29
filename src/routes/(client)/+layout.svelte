@@ -84,7 +84,7 @@
 	<title>CSI TKMCE</title>
 </svelte:head>
 
-<div class="border-y-1 border-[#181818] bg-[#222222] font-mono text-white min-7xl:border-1">
+<div class="border-y-1 border-[#181818] bg-[#222222] font-mono text-sm text-white min-7xl:border-1">
 	<header
 		class="sticky top-0 z-10 flex h-20 w-full justify-center border-b-1 border-[#181818] bg-transparent backdrop-blur-2xl duration-300 ease-in-out"
 	>
@@ -150,7 +150,7 @@
 					<li>
 						<a
 							href="/"
-							class={`block py-2 text-lg ${$page.url.pathname === '/' ? 'text-white' : ''}`}
+							class={`block py-2 text-sm ${$page.url.pathname === '/' ? 'text-white' : ''}`}
 							onclick={closeMenu}
 						>
 							Home
@@ -159,7 +159,7 @@
 					<li>
 						<a
 							href="/leaderboard"
-							class={`block py-2 text-lg ${$page.url.pathname === '/leaderboard' ? 'text-white' : ''}`}
+							class={`block py-2 text-sm ${$page.url.pathname === '/leaderboard' ? 'text-white' : ''}`}
 							onclick={closeMenu}
 						>
 							LeaderBoard
@@ -168,7 +168,7 @@
 					<li>
 						<a
 							href="/team"
-							class={`block py-2 text-lg ${$page.url.pathname === '/team' ? 'text-white' : ''}`}
+							class={`block py-2 text-sm ${$page.url.pathname === '/team' ? 'text-white' : ''}`}
 							onclick={closeMenu}
 						>
 							Team
@@ -177,7 +177,7 @@
 					<li>
 						<a
 							href="/events"
-							class={`block py-2 text-lg ${$page.url.pathname === '/events' ? 'text-white' : ''}`}
+							class={`block py-2 text-sm ${$page.url.pathname === '/events' ? 'text-white' : ''}`}
 							onclick={closeMenu}
 						>
 							Events
@@ -185,7 +185,7 @@
 					</li>
 					<li>
 						<button
-							class="block cursor-pointer py-2 text-left text-lg text-[#008CFF]"
+							class="block cursor-pointer py-2 text-left text-sm text-[#008CFF]"
 							onclick={async () => {
 								closeMenu();
 								await handleLoginLogout();
@@ -223,8 +223,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="left-20 bg-[#222222] p-2 text-xs text-[#818181]">
-				<a class="w-full text-[10px] text-[#707070]" href="https://storyset.com/technology"
+			<div class="left-20 bg-[#222222] p-2 text-sm text-[#818181]">
+				<a class="w-full text-xs text-[#707070]" href="https://storyset.com/technology"
 					>Technology illustrations by Storyset</a
 				>
 				<p class="mt-2">© Copyright CSI TKMCE. All Rights Reserved</p>

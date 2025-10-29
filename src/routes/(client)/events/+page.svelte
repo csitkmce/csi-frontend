@@ -38,7 +38,7 @@
 			<div class="">
 				<div class="flex w-full justify-center border-y-1 border-[#181818]">
 					<div class="flex h-20 w-full max-w-7xl items-center justify-start">
-						<h2 class="flex h-full items-center justify-center bg-black px-10 text-2xl">
+						<h2 class="flex h-full items-center justify-center bg-black px-10 text-3xl">
 							Ongoing Events
 						</h2>
 					</div>
@@ -53,7 +53,7 @@
 		{#if execomList.data['upcoming'].length > 0}
 			<div class="flex w-full justify-center border-b-1 border-[#181818]">
 				<div class="flex h-20 w-full max-w-7xl items-center justify-start">
-					<h2 class="flex h-full items-center justify-center bg-black px-10 text-2xl">
+					<h2 class="flex h-full items-center justify-center bg-black px-10 text-3xl">
 						Upcoming Events
 					</h2>
 				</div>
@@ -68,7 +68,7 @@
 			<div class="">
 				<div class="flex w-full justify-center border-y-1 border-[#181818]">
 					<div class="flex h-20 w-full max-w-7xl items-center justify-start">
-						<h2 class="flex h-full items-center justify-center bg-black px-10 text-2xl">
+						<h2 class="flex h-full items-center justify-center bg-black px-10 text-3xl">
 							Previous Events
 						</h2>
 					</div>
