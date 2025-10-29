@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { validateEmail } from '$lib/utils/validation';
+	import { MailIcon } from '@lucide/svelte';
 
 	let errorText = $state('');
 	let email = $state('');
@@ -46,7 +47,7 @@
 
 <div class="flex h-screen w-full flex-col items-center bg-white p-10 text-black">
 	<h1 class="text-3xl text-[#222222]">Forgot Password</h1>
-	<div class="mt-10 max-w-lg min-w-sm border-1 border-black p-3 shadow-[4px_4px_0_0_black]">
+	<div class="mt-10 max-w-md border-1 border-black p-3 shadow-[4px_4px_0_0_black]">
 		<div
 			class="{errorText
 				? 'block'
@@ -54,12 +55,20 @@
 		>
 			<p class="text-sm text-red-500">{errorText}</p>
 		</div>
+		<div
+			class="{stage === 'resend'
+				? 'block'
+				: 'hidden'} mb-2 flex min-h-6 w-full items-center justify-start gap-x-2 rounded bg-green-200 px-2 py-4 font-sans"
+		>
+			<MailIcon color="green" />
+			<p>We have sent a password recovery link to your email</p>
+		</div>
 		<p class="text-justify font-sans text-sm text-neutral-500">
-			You’ll receive an email with a password reset link. Click the link to go to the reset password
-			page. The link will be valid for 15 minutes.
+			Enter the email address associated with your account and we'll send an email with instructions
+			to reset your password
 		</p>
 
-		<p class="mt-4 font-sans text-sm">Enter your registered email address</p>
+		<p class="mt-4 font-sans text-sm">Email address</p>
 		<input
 			name="email"
 			bind:value={email}
