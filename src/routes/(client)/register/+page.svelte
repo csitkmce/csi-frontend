@@ -100,8 +100,8 @@
 			<div class="flex w-full flex-col items-center p-4">
 				<div
 					class="{errorText
-						? 'visible'
-						: 'invisible'} mb-4 flex min-h-6 w-full items-center justify-start rounded bg-red-200 px-1 font-sans"
+						? 'block'
+						: 'hidden'} mb-4 flex min-h-6 w-full items-center justify-start rounded bg-red-200 px-1 font-sans"
 				>
 					<p class="text-sm text-red-500">{errorText}</p>
 				</div>
