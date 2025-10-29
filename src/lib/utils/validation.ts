@@ -58,3 +58,19 @@ export function validateEmail(email: unknown) {
 	}
 	return null;
 }
+
+export function validateReset(password: unknown, confirmPassword: unknown) {
+	if (typeof password !== 'string' || typeof confirmPassword !== 'string') {
+		return 'Invalid form data';
+	}
+	if (!password) {
+		return 'Enter a valid password';
+	}
+	if (!confirmPassword) {
+		return 'Enter a valid confirm password';
+	}
+	if (password !== confirmPassword) {
+		return 'Passwords do not match';
+	}
+	return null;
+}
