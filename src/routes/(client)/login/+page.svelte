@@ -94,7 +94,7 @@
 				>
 					Login
 				</button>
-				<div class="mt-2 flex w-full items-center justify-end">
+				<div class="mt-2 mb-4 flex w-full items-center justify-end">
 					<a class="text-sm text-[#008CFF]" href="">Forgot Password?</a>
 				</div>
 			</div>
