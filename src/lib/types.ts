@@ -98,6 +98,11 @@ export type LeaderBoard = {
 	points: number;
 };
 
+export type resetUserData = {
+	email: string;
+	name: string;
+};
+
 export type ExecomList = Record<string, ExecomMember[]>;
 export type EventList = Record<string, Event[]>;
 export type EventData = {
