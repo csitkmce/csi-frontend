@@ -82,7 +82,7 @@
 	}
 </script>
 
-<div class="z-0 m-2 flex flex-col overflow-hidden bg-white shadow-[4px_4px_0_0_black]">
+<div class="z-0 m-2 flex flex-col overflow-hidden bg-white font-sans shadow-[4px_4px_0_0_black]">
 	<div class="aspect-3/2 w-full overflow-hidden bg-black">
 		<img alt="event-poster" src={event.image} />
 	</div>
