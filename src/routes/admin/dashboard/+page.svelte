@@ -1,6 +1,8 @@
-<div class="flex min-h-screen w-full max-w-7xl flex-col items-center bg-[#222222] border-x-1 border-black text-white">
-	<h1 class="my-10 font-mono transition-transform max-sm:text-3xl text-4xl">Admin Dashboard</h1>
-	<div class="w-full max-w-4xl gap-2 p-2 min-sm:grid grid-cols-2 max-sm:flex flex-col">
+<div
+	class="flex min-h-screen w-full max-w-7xl flex-col items-center border-x-1 border-black bg-[#222222] text-white"
+>
+	<h1 class="my-10 text-3xl transition-transform">Admin Dashboard</h1>
+	<div class="w-full max-w-4xl grid-cols-2 flex-col gap-2 p-2 font-mono max-sm:flex min-sm:grid">
 		<div class="my-2 flex flex-col border-1 border-black p-4 min-sm:w-full">
 			<h2>People</h2>
 			<div
