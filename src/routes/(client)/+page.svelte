@@ -62,7 +62,9 @@
 	<title>CSI - Computer Society of India</title>
 </svelte:head>
 
-<div class="flex w-full max-w-7xl flex-col justify-center overflow-hidden bg-[#222222] text-white">
+<div
+	class="flex min-h-screen w-full max-w-7xl flex-col justify-start overflow-hidden bg-[#222222] text-white"
+>
 	<!-- First Section -->
 	<section
 		id="hero"
@@ -207,6 +209,27 @@
 				<h3 class="m-4 w-full text-xl text-[#909090]">
 					Hi,<span class="font-bold">{myEvents.data.name.split(' ')[0]}</span>
 				</h3>
+				{#if myEvents.data.membershipStatus}
+					<div
+						class="m-4 flex flex-col gap-y-2 border-1 border-[#181818] p-4 font-sans shadow-[4px_4px_0_0_[#181818]]"
+					>
+						<div class="flex items-center gap-x-2">
+							<p class="text-sm">CSI Membership status:</p>
+							{#if myEvents.data.membershipStatus === 'active'}
+								<div class="rounded bg-green-900 px-2 py-1 text-green-300">Active</div>
+							{:else if myEvents.data.membershipStatus === 'expired'}
+								<div class="rounded bg-red-900 px-2 py-1 text-red-300">Expired</div>
+							{:else}
+								<div class="rounded bg-yellow-900 px-2 py-1 text-yellow-300">In Review</div>
+							{/if}
+						</div>
+						{#if myEvents.data.membershipStatus === 'active'}
+							<p class="text-neutral-400">
+								Expires on: <span class="font-bold">23-09-{myEvents.data.membershipExp}</span>
+							</p>
+						{/if}
+					</div>
+				{/if}
 				<div class="m-4 flex flex-col border-1 border-[#181818] p-4 shadow-[4px_4px_0_0_[#181818]]">
 					<h2 class="w-full text-2xl">My Events</h2>
 					{#if myEvents.data.events.length === 0}

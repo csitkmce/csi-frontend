@@ -111,6 +111,8 @@ export type EventData = {
 	department: string;
 	batch: string;
 	graduationYear: string;
+	membershipStatus: 'active' | 'expired' | 'review';
+	membershipExp?: string;
 	events: Event[];
 };
 
