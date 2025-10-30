@@ -71,7 +71,7 @@
 	<ActionsPane {dm_choices} {selected} onGo={onActionGo} />
 
 	<!-- Main body -->
-	<div class="mt-4 w-full overflow-auto border-1 border-black text-[#eeeeee]">
+	<div class="mt-4 w-full overflow-auto border-1 border-black font-sans text-[#eeeeee]">
 		<table class="table-fixed">
 			<thead class="bg-black">
 				<tr>

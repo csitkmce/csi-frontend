@@ -2,11 +2,11 @@
 	import type { UserDataRow } from '$lib/types';
 	import AdminTitleBtn from '$lib/components/admin-title-btn.svelte';
 	import AdminSearch from '$lib/components/admin-search.svelte';
-	import ActionsPane from '$lib/components/admin-actions.svelte'
+	import ActionsPane from '$lib/components/admin-actions.svelte';
 
 	let dm_choices = ['Delete'];
 	let searchText: string = $state('');
-    let selected : string = dm_choices[0];
+	let selected: string = dm_choices[0];
 	let users: UserDataRow[] = [
 		{
 			status: false,
@@ -43,15 +43,15 @@
 		}
 	];
 
-	function onAddClick(){
+	function onAddClick() {
 		//
 	}
 
-	function onSearch(){
+	function onSearch() {
 		//
 	}
 
-	function onActionGo(){
+	function onActionGo() {
 		//
 	}
 </script>
@@ -59,15 +59,15 @@
 <div
 	class="flex min-h-screen w-full max-w-7xl flex-col items-center border-x-1 border-black bg-[#222222] p-4 text-white"
 >
-	<AdminTitleBtn title="Manage Users" buttonText="Add Student" onPrimaryClick={onAddClick}/>
+	<AdminTitleBtn title="Manage Users" buttonText="Add Student" onPrimaryClick={onAddClick} />
 	<!-- Search bar -->
-	<AdminSearch searchText={searchText} onSearch={onSearch}/>
+	<AdminSearch {searchText} {onSearch} />
 
 	<!-- Actions pane -->
-	<ActionsPane dm_choices={dm_choices} selected={selected} onGo={onActionGo}/>
+	<ActionsPane {dm_choices} {selected} onGo={onActionGo} />
 
 	<!-- Main body -->
-	<div class="mt-4 w-full overflow-auto border-1 border-black text-[#eeeeee]">
+	<div class="mt-4 w-full overflow-auto border-1 border-black font-sans text-[#eeeeee]">
 		<table class="table-fixed">
 			<thead class="bg-black">
 				<tr>
