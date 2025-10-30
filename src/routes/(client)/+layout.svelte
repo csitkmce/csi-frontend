@@ -224,8 +224,10 @@
 				</div>
 			</div>
 			<div class="left-20 bg-[#222222] p-2 text-sm text-[#818181]">
-				<a class="w-full text-xs text-[#707070]" href="https://storyset.com/technology"
-					>Technology illustrations by Storyset</a
+				<a
+					target="_blank"
+					class="w-full text-xs text-[#707070]"
+					href="https://storyset.com/technology">Technology illustrations by Storyset</a
 				>
 				<p class="mt-2">© Copyright CSI TKMCE. All Rights Reserved</p>
 			</div>
