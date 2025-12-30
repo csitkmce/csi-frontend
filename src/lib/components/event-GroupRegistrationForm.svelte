@@ -5,7 +5,8 @@
 	import { onMount } from 'svelte';
 	import { isLoggedin } from '$lib/stores/auth';
 
-	let { event, user }: { event: Event; user: User | null } = $props();
+	let { event, user, paymentFunc }: { event: Event; user: User | null; paymentFunc: Function } =
+		$props();
 
 	let isCreate = $state(true);
 	let teamName = $state('');
@@ -103,8 +104,13 @@
 			if (!res.ok) {
 				error = data?.message || 'Registration failed';
 			} else {
-				success = isCreate ? 'Team created successfully!' : 'Joined team successfully!';
-				setTimeout(() => goto('/'), 1000);
+				if (!event.fee) {
+					success = isCreate ? 'Team created successfully!' : 'Joined team successfully!';
+					setTimeout(() => goto('/'), 1000);
+				} else {
+					console.log('data: ', data.data.registrationId);
+					await paymentFunc(data.data.registrationId);
+				}
 			}
 		} catch (err: any) {
 			error = err?.message || 'Something went wrong.';
@@ -242,7 +248,13 @@
 							class="m-4 cursor-pointer border-1 border-black bg-[#ffffff] px-6 py-3 text-black ease-in-out hover:bg-[#222222] hover:text-white disabled:opacity-50"
 							disabled={loading}
 						>
-							{#if loading}Creating...{:else}Create Team{/if}
+							{#if loading}
+								Creating...
+							{:else if event.fee}
+								Pay and Create Team
+							{:else}
+								Create Team
+							{/if}
 						</button>
 					</div>
 				</form>

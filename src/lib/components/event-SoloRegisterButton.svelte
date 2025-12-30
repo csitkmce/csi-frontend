@@ -5,6 +5,7 @@
 
 	export let event: Event;
 	export let user: User | null;
+	export let paymentFunc: Function;
 
 	let loading = false;
 	let error = '';
@@ -38,8 +39,13 @@
 				// Display any backend message (like "Already registered", "Event full")
 				error = data?.message || 'Registration failed';
 			} else {
-				success = 'Successfully registered!';
-				setTimeout(() => goto('/'), 1000);
+				if (!event.fee) {
+					success = 'Successfully registered!';
+					setTimeout(() => goto('/'), 1000);
+				} else {
+					console.log('data: ', data.data.registrationId);
+					await paymentFunc(data.data.registrationId);
+				}
 			}
 		} catch (err: any) {
 			error = err?.message || 'Something went wrong.';
@@ -81,7 +87,13 @@
 			disabled={loading}
 			class="cursor-pointer border-1 border-black bg-[#ffffff] px-6 py-3 text-black ease-in-out hover:bg-[#222222] hover:text-white disabled:opacity-50"
 		>
-			{#if loading}Registering...{:else}Register{/if}
+			{#if loading}
+				Registering...
+			{:else if event.fee}
+				Pay and Register
+			{:else}
+				Register
+			{/if}
 		</button>
 	</div>
 
