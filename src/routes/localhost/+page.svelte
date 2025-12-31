@@ -3,14 +3,22 @@
 </script>
 
 <div class="flex h-full w-full flex-col items-center">
-	<section class="h-20">//</section>
+	<section>
+		<div class="flex h-screen w-screen flex-col items-center justify-center">
+			<img class="w-150" alt="LocalHost 26" src="localhost/LOCALHOST26.png" />
+			<div class="mt-10 flex flex-col items-center font-akira text-2xl uppercase">
+				<p>February</p>
+				<p class="text-[#479DFF]">20 - 23</p>
+			</div>
+		</div>
+	</section>
 	<section class="relative flex flex-col items-center justify-center font-akira">
 		<img
 			class="absolute z-20 mx-auto my-auto w-40"
 			alt="LH-scribble"
 			src="localhost/LH-scribble.png"
 		/>
-		<div class="top-0 h-fit max-w-6xl p-5">
+		<div class="mt-10 mb-20 h-fit max-w-6xl p-5">
 			<p class="text-justify text-sm text-[#BABABA] uppercase">
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
 				labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
