@@ -4,13 +4,13 @@
 
 <div class="flex h-full w-full flex-col items-center">
 	<section class="h-20">//</section>
-	<!-- <section class="relative flex flex-col items-center justify-center font-akira">
+	<section class="relative flex flex-col items-center justify-center font-akira">
 		<img
-			class="absolute inset-0 z-20 mx-auto w-40"
+			class="absolute z-20 mx-auto my-auto w-40"
 			alt="LH-scribble"
 			src="localhost/LH-scribble.png"
 		/>
-		<div class="absolute top-0 h-fit max-w-6xl p-5">
+		<div class="top-0 h-fit max-w-6xl p-5">
 			<p class="text-justify text-sm text-[#BABABA] uppercase">
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
 				labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
@@ -23,7 +23,7 @@
 				<img class="w-16" alt="scribble" src="localhost/scribble1.png" />
 			</div>
 		</div>
-	</section> -->
+	</section>
 	<section class="max-w-6xl px-5">
 		<h2 class="font-akira text-2xl uppercase">Events</h2>
 		<div class="flex">
