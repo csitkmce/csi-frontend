@@ -18,6 +18,14 @@
 	font-display: swap;
 }
 
+@layer utilities {
+	.text-outline {
+		-webkit-text-stroke-width: 1px;
+		-webkit-text-stroke-color: #ffffff42; /* or any color */
+		-webkit-text-fill-color: transparent; /* makes the inside transparent */
+	}
+}
+
 .marquee-container {
 	overflow: hidden;
 	white-space: nowrap;

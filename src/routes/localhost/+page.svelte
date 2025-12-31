@@ -2,13 +2,89 @@
 	import LocalhostEventCard from '$lib/components/localhost/localhost-event-card.svelte';
 </script>
 
-<div class="flex h-full w-full flex-col items-center">
+<div class="flex h-full w-full flex-col items-center overflow-x-hidden">
 	<section>
-		<div class="flex h-screen w-screen flex-col items-center justify-center">
-			<img class="w-150" alt="LocalHost 26" src="localhost/LOCALHOST26.png" />
-			<div class="mt-10 flex flex-col items-center font-akira text-2xl uppercase">
-				<p>February</p>
-				<p class="text-[#479DFF]">20 - 23</p>
+		<div class="relative flex h-screen w-full flex-col items-center justify-center">
+			<div class="flex flex-col">
+				<div class="marquee-container flex items-center p-5">
+					<div class="text-outline marquee-track flex gap-x-20 font-akira text-[60px] uppercase">
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+					</div>
+				</div>
+				<div class="marquee-container flex items-center p-5">
+					<div class="text-outline marquee-track flex gap-x-20 font-akira text-[60px] uppercase">
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+					</div>
+				</div>
+				<div class="marquee-container flex items-center p-5">
+					<div class="text-outline marquee-track flex gap-x-20 font-akira text-[60px] uppercase">
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+					</div>
+				</div>
+				<div class="marquee-container flex items-center p-5">
+					<div class="text-outline marquee-track flex gap-x-20 font-akira text-[60px] uppercase">
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+					</div>
+				</div>
+				<div class="marquee-container flex items-center p-5">
+					<div class="text-outline marquee-track flex gap-x-20 font-akira text-[60px] uppercase">
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+					</div>
+				</div>
+				<div class="marquee-container flex items-center p-5">
+					<div class="text-outline marquee-track flex gap-x-20 font-akira text-[60px] uppercase">
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+						<span>LOCALHOST</span>
+					</div>
+				</div>
+			</div>
+			<div class="absolute my-auto flex flex-col items-center">
+				<img class="w-150 max-sm:w-100" alt="LocalHost 26" src="localhost/LOCALHOST26.png" />
+				<div class="mt-10 flex flex-col items-center font-akira text-2xl uppercase">
+					<p>February</p>
+					<p class="text-[#479DFF]">20 - 23</p>
+				</div>
 			</div>
 		</div>
 	</section>
