@@ -39,6 +39,18 @@ export type TeamMember = {
 	name: string;
 };
 
+export type LHevent = {
+	event_id: string;
+	event_name: string;
+	description: string;
+	image: string;
+	start_time: string;
+	end_time: string;
+	venue: string;
+};
+
+export type LHeventList = Record<string, LHevent[]>;
+
 export type Event = {
 	id: number;
 	name: string;
