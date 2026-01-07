@@ -153,7 +153,10 @@
 								endTime={event.end_time}
 								coordinators={event.coordinators}
 								venue={event.venue}
-								regStatus="closed"
+								almostFull={event.almostFull}
+								isOpen={event.isOpen}
+								isFull={event.isFull}
+								isClosed={event.isClosed}
 							/>
 						{/each}
 					{/each}

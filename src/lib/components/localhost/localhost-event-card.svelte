@@ -7,7 +7,10 @@
 		desc,
 		startTime,
 		endTime,
-		regStatus,
+		almostFull,
+		isClosed,
+		isFull,
+		isOpen,
 		coordinators,
 		venue
 	}: {
@@ -16,7 +19,10 @@
 		desc: string;
 		startTime: string;
 		endTime: string;
-		regStatus: 'now' | 'almost' | 'closed';
+		almostFull: boolean;
+		isClosed: boolean;
+		isFull: boolean;
+		isOpen: boolean;
 		coordinators: Array<CoordinatorType>;
 		venue: string;
 	} = $props();
@@ -36,18 +42,25 @@
 			<p class="font-akira text-base text-[#479DFF] uppercase">{startTime} - {endTime}</p>
 		</div>
 		<!-- Fix the track width issue -->
-		{#if regStatus === 'now'}
-			<div class="marquee-container flex items-center bg-[#5AED4C] px-5">
-				<div class="marquee-track flex overflow-hidden font-akira text-base text-white uppercase">
-					<span>Registration NOW</span>
-					<span>Registration NOW</span>
-				</div>
-			</div>
-		{:else if regStatus === 'almost'}
+		{#if almostFull}
 			<div class="marquee-container flex items-center bg-[#FFB145] px-5">
 				<div class="marquee-track flex overflow-hidden font-akira text-base text-white uppercase">
 					<span>ALMOST FULL</span>
 					<span>ALMOST FULL</span>
+				</div>
+			</div>
+		{:else if isFull}
+			<div class="marquee-container flex items-center bg-[#FF1616] px-5">
+				<div class="marquee-track flex overflow-hidden font-akira text-base text-white uppercase">
+					<span>Registration Full</span>
+					<span>Registration Full</span>
+				</div>
+			</div>
+		{:else if isOpen}
+			<div class="marquee-container flex items-center bg-[#5AED4C] px-5">
+				<div class="marquee-track flex overflow-hidden font-akira text-base text-white uppercase">
+					<span>Register NOW</span>
+					<span>Register NOW</span>
 				</div>
 			</div>
 		{:else}

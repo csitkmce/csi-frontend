@@ -53,6 +53,10 @@ export type LHevent = {
 	end_time: string;
 	venue: string;
 	coordinators: Array<CoordinatorType>;
+	almostFull: boolean;
+	isClosed: boolean;
+	isFull: boolean;
+	isOpen: boolean;
 };
 
 export type LHeventList = Record<string, LHevent[]>;
