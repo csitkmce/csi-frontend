@@ -39,6 +39,11 @@ export type TeamMember = {
 	name: string;
 };
 
+export type CoordinatorType = {
+	name: string;
+	phone: string;
+};
+
 export type LHevent = {
 	event_id: string;
 	event_name: string;
@@ -47,6 +52,7 @@ export type LHevent = {
 	start_time: string;
 	end_time: string;
 	venue: string;
+	coordinators: Array<CoordinatorType>;
 };
 
 export type LHeventList = Record<string, LHevent[]>;

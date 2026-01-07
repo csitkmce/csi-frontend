@@ -18,6 +18,7 @@
 				state: 'success',
 				data: await data.lhEventsRecord
 			};
+			console.log(data.lhEventsRecord);
 		} catch (error) {
 			eventList = {
 				state: 'failed',
@@ -148,8 +149,9 @@
 								title={event.event_name}
 								img={event.image}
 								desc={event.description}
-								time={event.start_time}
-								coordinators={['Farhaan - 8080808080', 'Farhaan - 8080808080']}
+								startTime={event.start_time}
+								endTime={event.end_time}
+								coordinators={event.coordinators}
 								venue={event.venue}
 								regStatus="closed"
 							/>

@@ -1,9 +1,12 @@
 <script lang="ts">
+	import type { CoordinatorType } from '$lib/types';
+
 	let {
 		title,
 		img,
 		desc,
-		time,
+		startTime,
+		endTime,
 		regStatus,
 		coordinators,
 		venue
@@ -11,9 +14,10 @@
 		title: string;
 		img: string;
 		desc: string;
-		time: string;
+		startTime: string;
+		endTime: string;
 		regStatus: 'now' | 'almost' | 'closed';
-		coordinators: Array<string>;
+		coordinators: Array<CoordinatorType>;
 		venue: string;
 	} = $props();
 </script>
@@ -29,7 +33,7 @@
 		</div>
 		<div class="flex w-full gap-x-3 bg-white px-5 py-1">
 			<p class="font-akira text-base text-black uppercase">TIME :</p>
-			<p class="font-akira text-base text-[#479DFF] uppercase">{time}</p>
+			<p class="font-akira text-base text-[#479DFF] uppercase">{startTime} - {endTime}</p>
 		</div>
 		<!-- Fix the track width issue -->
 		{#if regStatus === 'now'}
@@ -59,7 +63,7 @@
 				<p class="text-sm">Coordinators</p>
 				<div class="mt-2 text-sm text-[#BABABA]">
 					{#each coordinators as coordinator}
-						<p>{coordinator}</p>
+						<p>{coordinator.name} - {coordinator.phone}</p>
 					{/each}
 				</div>
 			</div>
