@@ -1,19 +1,29 @@
 <script lang="ts">
+	import type { CoordinatorType } from '$lib/types';
+
 	let {
 		title,
 		img,
 		desc,
-		time,
-		regStatus,
+		startTime,
+		endTime,
+		almostFull,
+		isClosed,
+		isFull,
+		isOpen,
 		coordinators,
 		venue
 	}: {
 		title: string;
 		img: string;
 		desc: string;
-		time: string;
-		regStatus: 'now' | 'almost' | 'closed';
-		coordinators: Array<string>;
+		startTime: string;
+		endTime: string;
+		almostFull: boolean;
+		isClosed: boolean;
+		isFull: boolean;
+		isOpen: boolean;
+		coordinators: Array<CoordinatorType>;
 		venue: string;
 	} = $props();
 </script>
@@ -29,21 +39,28 @@
 		</div>
 		<div class="flex w-full gap-x-3 bg-white px-5 py-1">
 			<p class="font-akira text-base text-black uppercase">TIME :</p>
-			<p class="font-akira text-base text-[#479DFF] uppercase">{time}</p>
+			<p class="font-akira text-base text-[#479DFF] uppercase">{startTime} - {endTime}</p>
 		</div>
 		<!-- Fix the track width issue -->
-		{#if regStatus === 'now'}
-			<div class="marquee-container flex items-center bg-[#5AED4C] px-5">
-				<div class="marquee-track flex overflow-hidden font-akira text-base text-white uppercase">
-					<span>Registration NOW</span>
-					<span>Registration NOW</span>
-				</div>
-			</div>
-		{:else if regStatus === 'almost'}
+		{#if almostFull}
 			<div class="marquee-container flex items-center bg-[#FFB145] px-5">
 				<div class="marquee-track flex overflow-hidden font-akira text-base text-white uppercase">
 					<span>ALMOST FULL</span>
 					<span>ALMOST FULL</span>
+				</div>
+			</div>
+		{:else if isFull}
+			<div class="marquee-container flex items-center bg-[#FF1616] px-5">
+				<div class="marquee-track flex overflow-hidden font-akira text-base text-white uppercase">
+					<span>Registration Full</span>
+					<span>Registration Full</span>
+				</div>
+			</div>
+		{:else if isOpen}
+			<div class="marquee-container flex items-center bg-[#5AED4C] px-5">
+				<div class="marquee-track flex overflow-hidden font-akira text-base text-white uppercase">
+					<span>Register NOW</span>
+					<span>Register NOW</span>
 				</div>
 			</div>
 		{:else}
@@ -59,7 +76,7 @@
 				<p class="text-sm">Coordinators</p>
 				<div class="mt-2 text-sm text-[#BABABA]">
 					{#each coordinators as coordinator}
-						<p>{coordinator}</p>
+						<p>{coordinator.name} - {coordinator.phone}</p>
 					{/each}
 				</div>
 			</div>

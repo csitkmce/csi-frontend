@@ -39,6 +39,28 @@ export type TeamMember = {
 	name: string;
 };
 
+export type CoordinatorType = {
+	name: string;
+	phone: string;
+};
+
+export type LHevent = {
+	event_id: string;
+	event_name: string;
+	description: string;
+	image: string;
+	start_time: string;
+	end_time: string;
+	venue: string;
+	coordinators: Array<CoordinatorType>;
+	almostFull: boolean;
+	isClosed: boolean;
+	isFull: boolean;
+	isOpen: boolean;
+};
+
+export type LHeventList = Record<string, LHevent[]>;
+
 export type Event = {
 	id: number;
 	name: string;
