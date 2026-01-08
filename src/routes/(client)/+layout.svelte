@@ -81,8 +81,12 @@
 </script>
 
 <svelte:head>
-	<title>CSI TKMCE</title>
+	<title>CSI TKMCE – Computer Society of India TKM College</title>
+	<meta name="description" content="CSI TKMCE is the official student chapter of the Computer Society of India at TKM College of Engineering, organizing workshops, events, competitions, and more.">
+	<meta name="keywords" content="CSI, TKMCE, Computer Society of India, TKM College of Engineering, CSI TKMCE, Student Chapter, Events, Workshops, Engineering Club">
+	<link rel="canonical" href="https://csitkmce.vercel.app/" />
 </svelte:head>
+
 
 <div class="border-y-1 border-[#181818] bg-[#222222] font-mono text-sm text-white min-7xl:border-1">
 	<header
@@ -110,7 +114,7 @@
 						>
 					</li>
 					<li>
-						<a class={$page.url.pathname === '/team' ? 'text-white' : ''} href="/team">Team</a>
+						<a class={$page.url.pathname === '/team' ? 'text-white' : ''} href="/team/2025">Team</a>
 					</li>
 					<li>
 						<a class={$page.url.pathname === '/events' ? 'text-white' : ''} href="/events">Events</a
