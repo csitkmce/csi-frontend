@@ -45,6 +45,10 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Forgot Password</title>
+</svelte:head>
+
 <div class="flex h-screen w-full flex-col items-center bg-white p-10 text-black">
 	<h1 class="text-3xl text-[#222222]">Forgot Password</h1>
 	<div class="mt-10 max-w-md border-1 border-black p-3 shadow-[4px_4px_0_0_black]">

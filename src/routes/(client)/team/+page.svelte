@@ -27,6 +27,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Team - CSI TKMCE</title>
+</svelte:head>
+
 <div class="flex w-full flex-col items-center">
 	<div
 		class="flex h-40 w-full max-w-7xl items-center justify-center border-x-1 border-b border-[#181818]"

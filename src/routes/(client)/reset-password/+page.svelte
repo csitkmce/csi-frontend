@@ -109,6 +109,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Reset Password - CSI TKMCE</title>
+</svelte:head>
+
 <div class="flex h-screen w-full flex-col items-center bg-white p-10 text-black">
 	{#if userData.state === 'pending'}
 		<p class="text-lg">{userData.message}</p>

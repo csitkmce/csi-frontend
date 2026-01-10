@@ -50,6 +50,10 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Login - CSI TKMCE</title>
+</svelte:head>
+
 <div class="flex min-h-screen w-full flex-col items-center bg-white p-10 text-sm text-black">
 	<h1 class="text-3xl text-[#222222]">WELCOME BACK</h1>
 	<div class="mt-10 min-w-sm border-1 border-black shadow-[4px_4px_0_0_black]">
