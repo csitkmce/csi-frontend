@@ -84,7 +84,7 @@
 					const res = await fetch(`${PUBLIC_API_URL}/api/payments/verify/`, {
 						method: 'POST',
 						headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
-						body: JSON.stringify({ response })
+						body: JSON.stringify(response)
 					});
 					const newRes = await res.json();
 					console.log(newRes);
