@@ -128,7 +128,7 @@
 						>
 					</li>
 					<li>
-						<a class={$page.url.pathname === '/team' ? 'text-white' : ''} href="/team/2025">Team</a>
+						<a class={$page.url.pathname === '/team' ? 'text-white' : ''} href="/team">Team</a>
 					</li>
 					<li>
 						<a class={$page.url.pathname === '/events' ? 'text-white' : ''} href="/events">Events</a
