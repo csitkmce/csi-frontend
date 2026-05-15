@@ -6,6 +6,8 @@
 	import { goto } from '$app/navigation';
 	import { isLoggedin } from '$lib/stores/auth.js';
 	import { PUBLIC_API_URL } from '$env/static/public';
+	import ExecomCallCard from '$lib/components/execom-call/execom-call-card.svelte';
+	import { EXECOM_CALL_ACTIVE } from '$lib/constants.js';
 
 	let { data } = $props();
 	let isLightOn: boolean = $state(false);
@@ -65,6 +67,17 @@
 <div
 	class="flex min-h-screen w-full max-w-7xl flex-col justify-start overflow-hidden bg-[#222222] text-white"
 >
+	{#if EXECOM_CALL_ACTIVE}
+		<ExecomCallCard
+			onRegisterClick={() => {
+				if (!$isLoggedin) {
+					goto('/login');
+				} else {
+					goto('/execom-call');
+				}
+			}}
+		/>
+	{/if}
 	<!-- First Section -->
 	<section
 		id="hero"

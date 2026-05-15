@@ -22,6 +22,17 @@ export type User = {
 	year: string;
 };
 
+export type UserRaw = {
+	userId: string;
+	userName: string;
+	userEmail: string;
+	phoneNumber: string;
+	batch: string;
+	year: string;
+	college: string;
+	department: string;
+};
+
 export type UserDataRow = {
 	status: boolean;
 	id: number;
