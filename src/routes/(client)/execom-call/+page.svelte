@@ -74,8 +74,8 @@
 		errorText = '';
 		try {
 			isSubLoading = true;
-			if (pref1 === '' || pref2 === '' || pref3 === '') {
-				errorText = 'Please fill in all preferences';
+			if (pref1 === '' || pref2 === '') {
+				errorText = 'Please select at least two preferences';
 				return;
 			}
 			if (reason === '') {
