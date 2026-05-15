@@ -231,7 +231,7 @@
 						</div>
 						<div class="mt-auto flex justify-center">
 							<button
-								disabled={isSubLoading}
+								disabled={isSubLoading || submitSuccess}
 								onclick={handleSubmit}
 								class={`flex w-min items-center justify-center ${submitSuccess ? 'bg-green-800 text-white' : 'bg-blue-800 text-blue-400'} px-2 py-2 max-sm:w-full`}
 								>{submitSuccess ? 'Subitted' : 'Submit'}
