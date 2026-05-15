@@ -79,7 +79,7 @@
 				return;
 			}
 			if (reason === '') {
-				errorText = 'Please enter a reason in the space provided';
+				errorText = 'Please share your vision in the space provided';
 				return;
 			}
 			const accessToken: string = localStorage.getItem('accessToken')!;
