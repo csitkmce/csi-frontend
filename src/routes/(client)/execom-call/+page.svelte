@@ -219,7 +219,7 @@
 							</select>
 						</div>
 						<div class="flex flex-col">
-							<p>Third Preference*</p>
+							<p>Third Preference</p>
 							<select bind:value={pref3} class="bg-neutral-700 px-2 py-1">
 								{#each positions as position}
 									<option value={position}>{position}</option>
