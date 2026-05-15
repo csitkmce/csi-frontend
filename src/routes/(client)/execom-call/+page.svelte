@@ -104,6 +104,7 @@
 				if (res.status === 401) {
 					errorText = 'Session out. Log in and try again';
 				}
+				return;
 			}
 			submitSuccess = true;
 		} catch (error) {
@@ -226,14 +227,14 @@
 							</select>
 						</div>
 						<div class="flex flex-col">
-							<p>Why you want to be an Execom Member?</p>
+							<p>What is your vision for CSI TKMCE as an ExeCom member?*</p>
 							<textarea bind:value={reason} class="min-h-20 bg-neutral-700 px-2 py-1"></textarea>
 						</div>
 						<div class="mt-auto flex justify-center">
 							<button
 								disabled={isSubLoading || submitSuccess}
 								onclick={handleSubmit}
-								class={`flex w-min items-center justify-center ${submitSuccess ? 'bg-green-800 text-white' : 'bg-blue-800 text-blue-400'} px-2 py-2 max-sm:w-full`}
+								class={`flex w-min items-center justify-center  ${submitSuccess ? 'bg-green-800 text-white' : 'bg-blue-800 text-blue-400 disabled:bg-neutral-900 disabled:text-neutral-400'} px-2 py-2 max-sm:w-full`}
 								>{submitSuccess ? 'Subitted' : 'Submit'}
 								{#if isSubLoading}
 									<Loader class="animate-spin" size="18" />
