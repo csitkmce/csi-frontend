@@ -235,7 +235,7 @@
 								disabled={isSubLoading || submitSuccess}
 								onclick={handleSubmit}
 								class={`flex w-min items-center justify-center  ${submitSuccess ? 'bg-green-800 text-white' : 'bg-blue-800 text-blue-400 disabled:bg-neutral-900 disabled:text-neutral-400'} px-2 py-2 max-sm:w-full`}
-								>{submitSuccess ? 'Subitted' : 'Submit'}
+								>{submitSuccess ? 'Submitted' : 'Submit'}
 								{#if isSubLoading}
 									<Loader class="animate-spin" size="18" />
 								{:else if submitSuccess}
