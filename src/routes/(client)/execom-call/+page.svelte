@@ -13,7 +13,7 @@
 
 	const positions = [
 		'Program Coordinator',
-		'Documentation',
+		'Documentation team',
 		'Media team',
 		'Publicity',
 		'Tech team',
