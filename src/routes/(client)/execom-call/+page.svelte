@@ -15,7 +15,7 @@
 		'Program Coordinator',
 		'Documentation team',
 		'Media team',
-		'Publicity',
+		'Publicity team',
 		'Tech team',
 		'Volunteer',
 		'Design team'
