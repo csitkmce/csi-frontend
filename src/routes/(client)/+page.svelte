@@ -1,7 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import EventCard from '$lib/components/event-card.svelte';
-	import { type Event, type EventData, type LoadedData } from '$lib/types';
+	import {
+		type Event,
+		type EventData,
+		type ExecomApplicationData,
+		type LoadedData
+	} from '$lib/types';
 	import { Power } from '@lucide/svelte';
 	import { goto } from '$app/navigation';
 	import { isLoggedin } from '$lib/stores/auth.js';
@@ -19,6 +24,11 @@
 	let myEvents = $state<LoadedData<EventData>>({
 		state: 'pending',
 		message: 'Loading events list'
+	});
+
+	let execomApplicationData = $state<LoadedData<ExecomApplicationData>>({
+		state: 'pending',
+		message: 'Loading Application data'
 	});
 
 	$effect(() => {
@@ -48,6 +58,37 @@
 						message: 'Failed to load'
 					};
 				}
+				if (EXECOM_CALL_ACTIVE) {
+					try {
+						const res = await fetch(`${PUBLIC_API_URL}/api/execom/application`, {
+							method: 'GET',
+							headers: {
+								'Content-Type': 'application/json',
+								Authorization: `Bearer ${accessToken}`
+							}
+						});
+						if (!res.ok) {
+							if (res.status === 404) {
+								execomApplicationData = {
+									state: 'failed',
+									message: '404'
+								};
+							}
+							return;
+						}
+						const data = await res.json();
+						execomApplicationData = {
+							state: 'success',
+							data: data
+						};
+					} catch (error) {
+						console.error(error);
+						execomApplicationData = {
+							state: 'failed',
+							message: 'Failed to fetch application data'
+						};
+					}
+				}
 			} else {
 				myEvents = {
 					state: 'pending',
@@ -67,7 +108,7 @@
 <div
 	class="flex min-h-screen w-full max-w-7xl flex-col justify-start overflow-hidden bg-[#222222] text-white"
 >
-	{#if EXECOM_CALL_ACTIVE}
+	{#if (EXECOM_CALL_ACTIVE && execomApplicationData.state === 'failed') || !$isLoggedin}
 		<ExecomCallCard
 			onRegisterClick={() => {
 				if (!$isLoggedin) {
@@ -85,33 +126,33 @@
 			? ''
 			: 'min-h-180'} flex-col items-center justify-start border-x-1 border-[#181818]"
 	>
-		<div class="flex w-full items-center justify-between border-b-1 border-[#181818]">
-			<div class={isLightOn ? 'animate-pulse' : ''}>
-				<svg
-					width="111"
-					height="130"
-					viewBox="0 0 111 130"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<path
-						d="M0.5 128.221L0.5 1.7793L110.001 65L0.5 128.221Z"
-						fill={isLightOn ? '#bfbfbf' : '#313131'}
-						stroke="[#181818]"
-					/>
-				</svg>
-			</div>
-			<button
-				class="flex h-[130px] w-[130px] items-center justify-center rounded-full border-1 border-[#181818] bg-[#1B1B1B]"
-				onclick={toggleLight}
-			>
-				<Power color={isLightOn ? '#008CFF' : '#ffffff'} />
-			</button>
-		</div>
 		{#if !$isLoggedin}
+			<div class="flex w-full items-center justify-between border-b-1 border-[#181818]">
+				<div class={isLightOn ? 'animate-pulse' : ''}>
+					<svg
+						width="111"
+						height="130"
+						viewBox="0 0 111 130"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							d="M0.5 128.221L0.5 1.7793L110.001 65L0.5 128.221Z"
+							fill={isLightOn ? '#bfbfbf' : '#313131'}
+							stroke="[#181818]"
+						/>
+					</svg>
+				</div>
+				<button
+					class="flex h-[130px] w-[130px] items-center justify-center rounded-full border-1 border-[#181818] bg-[#1B1B1B]"
+					onclick={toggleLight}
+				>
+					<Power color={isLightOn ? '#008CFF' : '#ffffff'} />
+				</button>
+			</div>
 			<div class="flex h-full w-full items-center min-md:px-10">
 				<div
-					class="min-lg:rounded-6xl flex items-center overflow-hidden rounded-4xl bg-[#2D2D2D] max-md:m-10 max-md:flex-col"
+					class="lg:rounded-6xl flex items-center overflow-hidden rounded-4xl bg-[#2D2D2D] max-md:m-10 max-md:flex-col"
 				>
 					<h1 class="mt-8 hidden w-full text-center text-3xl max-md:block">WELCOME TO CSI</h1>
 					<div class="flex h-full w-full flex-col items-center justify-center min-xl:max-w-110">
@@ -212,19 +253,64 @@
 		</section>
 	{/if}
 	{#if $isLoggedin}
-		<section id="myevents" class="flex flex-col border-x-1 border-[#181818] p-4">
+		<section id="myevents" class="flex flex-col gap-4 border-x border-[#181818] p-4">
+			{#if myEvents.state === 'success'}
+				<h3 class="w-full text-xl text-[#909090]">
+					Hi,<span class="font-bold">{myEvents.data.name.split(' ')[0]}</span>
+				</h3>
+			{/if}
+			{#if execomApplicationData.state === 'success'}
+				<div
+					class="flex flex-col border-2 border-neutral-700 font-sans shadow-[4px_4px_0_0_[#ffffff]]"
+				>
+					<h2 class="w-full bg-neutral-900 p-2 text-sm uppercase">My Execom Application</h2>
+					<div class="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 lg:grid-cols-3">
+						<div class="flex flex-col">
+							<p class="text-xs text-neutral-400">Preference 1</p>
+							<p class="text-sm font-bold text-neutral-200">
+								{execomApplicationData.data.application.preference1}
+							</p>
+						</div>
+						<div class="flex flex-col">
+							<p class="text-xs text-neutral-400">Preference 2</p>
+							<p class="text-sm font-bold text-neutral-200">
+								{execomApplicationData.data.application.preference2}
+							</p>
+						</div>
+						<div class="flex flex-col">
+							<p class="text-xs text-neutral-400">Preference 3</p>
+							<p class="text-sm font-bold text-neutral-200">
+								{#if execomApplicationData.data.application.preference3}
+									{execomApplicationData.data.application.preference3}
+								{:else}
+									Not Applicable
+								{/if}
+							</p>
+						</div>
+					</div>
+					<div class="flex w-full flex-col gap-2 border-t-2 border-neutral-700 p-2">
+						<p class="text-justify text-neutral-400">
+							Click the link below to join the whatsapp group for further proceedings. All
+							registered applicants must join the group without any delay
+						</p>
+						<a
+							target="_blank"
+							class="w-full bg-green-900 p-2 text-green-300 lg:w-fit"
+							href={execomApplicationData.data.whatsappLink}
+							>{execomApplicationData.data.whatsappLink}</a
+						>
+					</div>
+				</div>
+			{/if}
 			{#if myEvents.state === 'pending'}
-				<div class="m-4 flex w-full animate-pulse flex-col items-center overflow-hidden">
+				<div class="flex w-full animate-pulse flex-col items-center overflow-hidden">
 					<div class="mb-4 flex h-10 w-full overflow-hidden bg-[#303030]"></div>
 					<div class="mb-4 flex h-600 w-full overflow-hidden bg-[#303030]"></div>
 				</div>
 			{:else if myEvents.state === 'success'}
-				<h3 class="m-4 w-full text-xl text-[#909090]">
-					Hi,<span class="font-bold">{myEvents.data.name.split(' ')[0]}</span>
-				</h3>
 				{#if myEvents.data.membershipStatus}
 					<div
-						class="m-4 flex flex-col gap-y-2 border-1 border-[#181818] p-4 font-sans shadow-[4px_4px_0_0_[#181818]]"
+						class="flex flex-col gap-y-2 border-2 border-neutral-700 p-4 font-sans shadow-[4px_4px_0_0_[#181818]]"
 					>
 						<div class="flex items-center gap-x-2">
 							<p class="text-sm">CSI Membership status:</p>
@@ -243,7 +329,7 @@
 						{/if}
 					</div>
 				{/if}
-				<div class="m-4 flex flex-col border-1 border-[#181818] p-4 shadow-[4px_4px_0_0_[#181818]]">
+				<div class="flex flex-col border-2 border-neutral-700 p-4 shadow-[4px_4px_0_0_[#181818]]">
 					<h2 class="w-full text-2xl">My Events</h2>
 					{#if myEvents.data.events.length === 0}
 						<div class="flex h-100 w-full flex-col items-center justify-center">
@@ -255,7 +341,7 @@
 							<p class="text-lg text-[#808080]">No registered events</p>
 						</div>
 					{:else}
-						<div class="flex flex-col gap-4 min-sm:grid sm:grid-cols-2 lg:grid-cols-3">
+						<div class="flex flex-col gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-3">
 							{#each myEvents.data.events as event}
 								<EventCard
 									{event}

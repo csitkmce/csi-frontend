@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { PUBLIC_API_URL } from '$env/static/public';
 	import { EXECOM_CALL_ACTIVE } from '$lib/constants';
-	import type { UserRaw, LoadedData } from '$lib/types';
+	import type { UserRaw, LoadedData, ExecomApplicationData } from '$lib/types';
 	import { Check, Loader } from '@lucide/svelte';
 	import { error } from '@sveltejs/kit';
 
@@ -17,7 +17,7 @@
 		'Design Team',
 		'Publicity Team',
 		'Social Media Team',
-		'Membership  Team',
+		'Membership Team',
 		'Documentation Team',
 		'Volunteer'
 	];
@@ -29,6 +29,8 @@
 	let errorText = $state('');
 	let isSubLoading = $state(false);
 	let submitSuccess = $state(false);
+
+	let resData = $state<ExecomApplicationData>();
 
 	$effect(() => {
 		if (EXECOM_CALL_ACTIVE) {
@@ -107,6 +109,7 @@
 				}
 				return;
 			}
+			resData = data;
 			submitSuccess = true;
 		} catch (error) {
 			console.error(error);
@@ -205,7 +208,7 @@
 						{/if}
 						<div class="flex flex-col">
 							<p>First Preference*</p>
-							<select bind:value={pref1} class="bg-neutral-700 px-2 py-1">
+							<select disabled={submitSuccess} bind:value={pref1} class="bg-neutral-700 px-2 py-1">
 								{#each positions as position}
 									<option value={position}>{position}</option>
 								{/each}
@@ -213,7 +216,7 @@
 						</div>
 						<div class="flex flex-col">
 							<p>Second Preference*</p>
-							<select bind:value={pref2} class="bg-neutral-700 px-2 py-1">
+							<select disabled={submitSuccess} bind:value={pref2} class="bg-neutral-700 px-2 py-1">
 								{#each positions as position}
 									<option value={position}>{position}</option>
 								{/each}
@@ -221,7 +224,7 @@
 						</div>
 						<div class="flex flex-col">
 							<p>Third Preference</p>
-							<select bind:value={pref3} class="bg-neutral-700 px-2 py-1">
+							<select disabled={submitSuccess} bind:value={pref3} class="bg-neutral-700 px-2 py-1">
 								{#each positions as position}
 									<option value={position}>{position}</option>
 								{/each}
@@ -229,21 +232,40 @@
 						</div>
 						<div class="flex flex-col">
 							<p>What is your vision for CSI TKMCE as an ExeCom member?*</p>
-							<textarea bind:value={reason} class="min-h-20 bg-neutral-700 px-2 py-1"></textarea>
+							<textarea
+								disabled={submitSuccess}
+								bind:value={reason}
+								class="min-h-20 bg-neutral-700 px-2 py-1"
+							></textarea>
 						</div>
-						<div class="mt-auto flex justify-center">
-							<button
-								disabled={isSubLoading || submitSuccess}
-								onclick={handleSubmit}
-								class={`flex w-min items-center justify-center  ${submitSuccess ? 'bg-green-800 text-white' : 'bg-blue-800 text-blue-400 disabled:bg-neutral-900 disabled:text-neutral-400'} px-2 py-2 max-sm:w-full`}
-								>{submitSuccess ? 'Submitted' : 'Submit'}
-								{#if isSubLoading}
-									<Loader class="animate-spin" size="18" />
-								{:else if submitSuccess}
-									<Check size="18" />
-								{/if}</button
-							>
-						</div>
+						{#if !submitSuccess}
+							<div class="mt-auto flex justify-center">
+								<button
+									disabled={isSubLoading}
+									onclick={handleSubmit}
+									class={`flex w-min items-center justify-center bg-blue-800 px-2 py-2 text-blue-400 disabled:bg-neutral-900 disabled:text-neutral-400 max-sm:w-full`}
+									>{submitSuccess ? 'Submitted' : 'Submit'}
+									{#if isSubLoading}
+										<Loader class="animate-spin" size="18" />
+									{/if}</button
+								>
+							</div>
+						{:else}
+							<div class="flex flex-col border-2 border-neutral-400">
+								<div class="bg-green-900 p-2 text-white">Submitted Successfully</div>
+								<div class="flex flex-col gap-2 p-2">
+									<p class=" text-sm text-neutral-400">
+										Click the link below to join the whatsapp group for further proceedings. All
+										registered applicants must join the group without any delay
+									</p>
+									<a
+										target="_blank"
+										class="w-full bg-green-900 p-2 text-green-300 lg:w-fit"
+										href={resData!.whatsappLink}>{resData!.whatsappLink}</a
+									>
+								</div>
+							</div>
+						{/if}
 					</div>
 				</div>
 			</div>

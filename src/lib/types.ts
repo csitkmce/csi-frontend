@@ -149,6 +149,17 @@ export type EventData = {
 	events: Event[];
 };
 
+export type ExecomApplicationData = {
+	application: {
+		application_id: string;
+		preference1: string;
+		preference2: string;
+		preference3: string | null;
+		answer: string;
+	};
+	whatsappLink: string;
+};
+
 export type LoadedData<T> = LoadingPending | LoadingSuccess<T> | LoadingFailure;
 
 type LoadingSuccess<T> = {
