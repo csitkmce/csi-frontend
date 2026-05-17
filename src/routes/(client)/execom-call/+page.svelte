@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { PUBLIC_API_URL } from '$env/static/public';
 	import { EXECOM_CALL_ACTIVE } from '$lib/constants';
+	import { isLoggedin } from '$lib/stores/auth';
 	import type { UserRaw, LoadedData, ExecomApplicationData } from '$lib/types';
 	import { Check, Loader } from '@lucide/svelte';
 	import { error } from '@sveltejs/kit';
@@ -33,6 +34,34 @@
 	let resData = $state<ExecomApplicationData>();
 
 	$effect(() => {
+		(async () => {
+			if ($isLoggedin) {
+				const accessToken: string = localStorage.getItem('accessToken')!;
+				try {
+					const res = await fetch(`${PUBLIC_API_URL}/api/execom/application`, {
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+							Authorization: `Bearer ${accessToken}`
+						}
+					});
+					const data = await res.json();
+					if (res.ok) {
+						resData = data;
+						pref1 = resData?.application.preference1!;
+						pref2 = resData?.application.preference2!;
+						pref3 = resData?.application.preference3 ? resData?.application.preference3 : '';
+						reason = resData?.application.answer!;
+						submitSuccess = true;
+					}
+				} catch (error) {
+					//
+				}
+			}
+		})();
+	});
+
+	$effect(() => {
 		if (EXECOM_CALL_ACTIVE) {
 			(async () => {
 				const accessToken: string = localStorage.getItem('accessToken')!;
@@ -61,6 +90,7 @@
 					};
 					isSubLoading = false;
 					submitSuccess = false;
+					reason = '';
 				} catch (error) {
 					user = {
 						state: 'failed',
