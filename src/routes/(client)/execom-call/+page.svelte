@@ -13,12 +13,13 @@
 
 	const positions = [
 		'Program Coordinator',
-		'Documentation team',
-		'Media team',
-		'Publicity team',
-		'Tech team',
-		'Volunteer',
-		'Design team'
+		'Technical Team',
+		'Design Team',
+		'Publicity Team',
+		'Social Media Team',
+		'Membership  Team',
+		'Documentation Team',
+		'Volunteer'
 	];
 
 	let pref1 = $state('');
