@@ -4,7 +4,7 @@
 	import { EXECOM_CALL_ACTIVE } from '$lib/constants';
 	import { isLoggedin } from '$lib/stores/auth';
 	import type { UserRaw, LoadedData, ExecomApplicationData } from '$lib/types';
-	import { Check, Loader } from '@lucide/svelte';
+	import { Check, Loader, MessageCircle } from '@lucide/svelte';
 	import { error } from '@sveltejs/kit';
 
 	let user: LoadedData<UserRaw> = $state({
@@ -32,34 +32,6 @@
 	let submitSuccess = $state(false);
 
 	let resData = $state<ExecomApplicationData>();
-
-	$effect(() => {
-		(async () => {
-			if ($isLoggedin) {
-				const accessToken: string = localStorage.getItem('accessToken')!;
-				try {
-					const res = await fetch(`${PUBLIC_API_URL}/api/execom/application`, {
-						method: 'GET',
-						headers: {
-							'Content-Type': 'application/json',
-							Authorization: `Bearer ${accessToken}`
-						}
-					});
-					const data = await res.json();
-					if (res.ok) {
-						resData = data;
-						pref1 = resData?.application.preference1!;
-						pref2 = resData?.application.preference2!;
-						pref3 = resData?.application.preference3 ? resData?.application.preference3 : '';
-						reason = resData?.application.answer!;
-						submitSuccess = true;
-					}
-				} catch (error) {
-					//
-				}
-			}
-		})();
-	});
 
 	$effect(() => {
 		if (EXECOM_CALL_ACTIVE) {
@@ -98,6 +70,26 @@
 					};
 					errorText = error as string;
 					console.error(error);
+				}
+				try {
+					const res = await fetch(`${PUBLIC_API_URL}/api/execom/application`, {
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+							Authorization: `Bearer ${accessToken}`
+						}
+					});
+					const data = await res.json();
+					if (res.ok) {
+						resData = data;
+						pref1 = resData?.application.preference1!;
+						pref2 = resData?.application.preference2!;
+						pref3 = resData?.application.preference3 ? resData?.application.preference3 : '';
+						reason = resData?.application.answer!;
+						submitSuccess = true;
+					}
+				} catch (error) {
+					//
 				}
 			})();
 		}
@@ -290,8 +282,8 @@
 									</p>
 									<a
 										target="_blank"
-										class="w-full bg-green-900 p-2 text-green-300 lg:w-fit"
-										href={resData!.whatsappLink}>{resData!.whatsappLink}</a
+										class="flex w-full items-center justify-center gap-x-2 bg-green-900 p-2 text-green-300"
+										href={resData!.whatsappLink}>WhatsApp Link <MessageCircle size="15" /></a
 									>
 								</div>
 							</div>

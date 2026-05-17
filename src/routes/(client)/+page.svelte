@@ -7,7 +7,7 @@
 		type ExecomApplicationData,
 		type LoadedData
 	} from '$lib/types';
-	import { Power } from '@lucide/svelte';
+	import { MessageCircle, Power } from '@lucide/svelte';
 	import { goto } from '$app/navigation';
 	import { isLoggedin } from '$lib/stores/auth.js';
 	import { PUBLIC_API_URL } from '$env/static/public';
@@ -288,16 +288,18 @@
 							</p>
 						</div>
 					</div>
-					<div class="flex w-full flex-col gap-2 border-t-2 border-neutral-700 p-2">
+					<div
+						class="flex w-full items-center gap-2 border-t-2 border-neutral-700 p-2 max-lg:flex-col lg:justify-between"
+					>
 						<p class="text-justify text-neutral-400">
-							Click the link below to join the whatsapp group for further proceedings. All
+							Click the given link to join the whatsapp group for further proceedings. All
 							registered applicants must join the group without any delay
 						</p>
 						<a
 							target="_blank"
-							class="w-full bg-green-900 p-2 text-green-300 lg:w-fit"
+							class="flex w-full items-center justify-center gap-x-2 bg-green-900 p-2 text-green-300 lg:w-fit"
 							href={execomApplicationData.data.whatsappLink}
-							>{execomApplicationData.data.whatsappLink}</a
+							>WhatsApp Link <MessageCircle size="15" /></a
 						>
 					</div>
 				</div>
