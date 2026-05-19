@@ -4,7 +4,7 @@
 	import { EXECOM_CALL_ACTIVE } from '$lib/constants';
 	import { isLoggedin } from '$lib/stores/auth';
 	import type { UserRaw, LoadedData, ExecomApplicationData } from '$lib/types';
-	import { Check, Loader, MessageCircle } from '@lucide/svelte';
+	import { Check, Loader, MessageCircle, X } from '@lucide/svelte';
 	import { error } from '@sveltejs/kit';
 
 	let user: LoadedData<UserRaw> = $state({
@@ -30,10 +30,13 @@
 	let isSubLoading = $state(false);
 	let submitSuccess = $state(false);
 
+	let infoOpen = $state(false);
+
 	let resData = $state<ExecomApplicationData>();
 
 	$effect(() => {
 		if (EXECOM_CALL_ACTIVE) {
+			infoOpen = false;
 			(async () => {
 				const accessToken: string = localStorage.getItem('accessToken')!;
 				try {
@@ -138,6 +141,18 @@
 			isSubLoading = false;
 		}
 	}
+
+	$effect(() => {
+		if (infoOpen) {
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = '';
+		}
+
+		return () => {
+			document.body.style.overflow = '';
+		};
+	});
 </script>
 
 <svelte:head>
@@ -145,7 +160,9 @@
 </svelte:head>
 
 {#if EXECOM_CALL_ACTIVE}
-	<div class="flex w-full max-w-7xl flex-col items-center border-x border-[#181818]">
+	<div
+		class={`flex w-full max-w-7xl flex-col items-center border-x border-[#181818] ${infoOpen ? 'h-[50vh] overflow-hidden' : ''}`}
+	>
 		<div class="flex h-40 w-full items-center justify-center">
 			<h1 class="text-3xl">Execom Call</h1>
 		</div>
@@ -187,9 +204,17 @@
 					</p>
 				</div>
 			</div>
-			<div class="border-t border-[#181818]"></div>
+			<div class="w-full border-t-2 border-stone-700"></div>
 			<div class="flex w-full flex-col gap-y-4 p-4">
 				<h3 class="text-lg font-bold uppercase">Fill in your preferences</h3>
+				<p>
+					<button
+						class="text-blue-400"
+						onclick={() => {
+							infoOpen = true;
+						}}>Click here</button
+					> to view details regarding different available positions.
+				</p>
 				<div class="flex gap-4 max-sm:flex-col">
 					<div class="flex w-full flex-col gap-y-4 border-2 border-stone-700 p-4 text-neutral-400">
 						{#if user.state === 'pending'}
@@ -296,5 +321,114 @@
 	<div class="relative top-20 flex h-screen w-full flex-col items-center">
 		<h2 class="text-2xl font-bold">404</h2>
 		<p class="text-lg">Not Found</p>
+	</div>
+{/if}
+
+{#if infoOpen}
+	<div class="absolute inset-0 z-50 m-0 flex items-center justify-center bg-black/90">
+		<div class="mx-4 w-auto bg-[#181818] sm:w-120">
+			<div
+				class="flex w-full items-center justify-between border-b-2 border-stone-700 px-4 py-4 text-lg font-bold text-neutral-300"
+			>
+				<p>Execom Role Responsibilities</p>
+				<button
+					onclick={() => {
+						infoOpen = false;
+					}}><X /></button
+				>
+			</div>
+			<div class="max-h-[70vh] overflow-y-auto p-4">
+				<ol class="ml-8 flex list-decimal flex-col gap-y-4">
+					<li>
+						<p class="flex flex-col">
+							<span class="font-bold">Program Coordinator</span>
+							<span class="mb-1 flex flex-col font-sans text-neutral-400"
+								>Oversees event planning and execution</span
+							>
+							<span class="text-justify font-sans text-sm"
+								>Responsibilities include organizing events, planning timelines and schedules, and
+								coordinating across teams.</span
+							>
+						</p>
+					</li>
+					<li>
+						<p class="flex flex-col">
+							<span class="font-bold">Technical Team</span>
+							<span class="mb-1 flex flex-col font-sans text-neutral-400"
+								>Handles all tech-related needs</span
+							>
+							<span class="text-justify font-sans text-sm"
+								>Responsibilities include maintaining the official website and providing technical
+								support for the smooth functioning of the events.</span
+							>
+						</p>
+					</li>
+					<li>
+						<p class="flex flex-col">
+							<span class="font-bold">Design Team</span>
+							<span class="mb-1 flex flex-col font-sans text-neutral-400"
+								>Creates visual content and branding</span
+							>
+							<span class="text-justify font-sans text-sm"
+								>Responsibilities include designing event posters, banners, and event materials.</span
+							>
+						</p>
+					</li>
+					<li>
+						<p class="flex flex-col">
+							<span class="font-bold">Publicity Team</span>
+							<span class="mb-1 flex flex-col font-sans text-neutral-400"
+								>Promotes events and initiatives</span
+							>
+							<span class="text-justify font-sans text-sm"
+								>Responsibilities include spreading awareness through various channels, actively
+								driving member involvement, and working closely with the student community to ensure
+								club activities directly serve their needs and personal development.</span
+							>
+						</p>
+					</li>
+					<li>
+						<p class="flex flex-col">
+							<span class="font-bold">Media Team</span>
+							<span class="mb-1 flex flex-col font-sans text-neutral-400"
+								>Manages the social media handles of the club and oversees the visual coverage of
+								events</span
+							>
+							<span class="text-justify font-sans text-sm"
+								>Responsibilities include planning and scheduling posts, engaging with followers,
+								coordinating closely with the publicity team, covering events through photography
+								and videography, editing media content, and publishing event highlights and
+								promotional content on social media platforms.</span
+							>
+						</p>
+					</li>
+					<li>
+						<p class="flex flex-col">
+							<span class="font-bold">Documentation Team</span>
+							<span class="mb-1 flex flex-col font-sans text-neutral-400"
+								>Maintains records and archives of all club activities</span
+							>
+							<span class="text-justify font-sans text-sm"
+								>Responsibilities include preparing event write-ups, detailed annual reports,
+								meeting minutes, and contributing to newsletters.</span
+							>
+						</p>
+					</li>
+					<li>
+						<p class="flex flex-col">
+							<span class="font-bold">Operations Team</span>
+							<span class="mb-1 flex flex-col font-sans text-neutral-400"
+								>Arranges materials and ensures the seamless execution of activities</span
+							>
+							<span class="text-justify font-sans text-sm"
+								>Responsibilities include managing logistics, sourcing and setting up required
+								materials for events, and providing on-ground support to ensure everything runs
+								smoothly.</span
+							>
+						</p>
+					</li>
+				</ol>
+			</div>
+		</div>
 	</div>
 {/if}
