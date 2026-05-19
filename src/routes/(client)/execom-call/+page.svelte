@@ -17,10 +17,9 @@
 		'Technical Team',
 		'Design Team',
 		'Publicity Team',
-		'Social Media Team',
-		// 'Membership Team',
-		'Documentation Team'
-		// 'Volunteer'
+		'Media Team',
+		'Documentation Team',
+		'Operations Team'
 	];
 
 	let pref1 = $state('');
