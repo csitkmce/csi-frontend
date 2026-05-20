@@ -197,6 +197,11 @@
 						management, marketing, social media, or coordination — there’s a place for you in the
 						CSI family!
 					</p>
+					<p class="font-bold">
+						Eligibility: <span class="text-neutral-200"
+							>Students from CS, ER, and MCA departments are eligible to apply.</span
+						>
+					</p>
 					<p>
 						Ready to join the team?<br />
 						Fill in your details below and
