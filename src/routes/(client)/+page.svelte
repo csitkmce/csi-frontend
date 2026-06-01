@@ -108,7 +108,7 @@
 <div
 	class="flex min-h-screen w-full max-w-7xl flex-col justify-start overflow-hidden bg-[#222222] text-white"
 >
-	{#if (EXECOM_CALL_ACTIVE && execomApplicationData.state === 'failed') || !$isLoggedin}
+	{#if EXECOM_CALL_ACTIVE && (execomApplicationData.state === 'failed' || !$isLoggedin)}
 		<ExecomCallCard
 			onRegisterClick={() => {
 				if (!$isLoggedin) {
