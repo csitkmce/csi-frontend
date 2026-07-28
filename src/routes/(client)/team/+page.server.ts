@@ -4,6 +4,6 @@ import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async ({ }) => {
     return {
-        execomList: getExecomData(2025)
+        execomList: getExecomData(2026)
     };
 }
