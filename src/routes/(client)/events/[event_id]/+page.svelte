@@ -16,13 +16,13 @@
 	// Put your QR image at: csi-frontend/static/images/payment-qr.png
 	const PAYMENT_QR_URL = '/images/payment-qr.jpegdid ju ';
 
-	let posterUrl = '';
-	let error = '';
-	let event: Event | null = null;
-	let user: User | null = null;
+	let posterUrl = $state('');
+	let error = $state('');
+	let event: Event | null = $state(null);
+	let user: User | null = $state(null);
 	let accessToken: string | null = null;
-	let paymentError = '';
-	let paymentSuccess = '';
+	let paymentError = $state('');
+	let paymentSuccess = $state('');
 	let showPaymentModal = $state(false);
 
 	// RAZORPAY (commented out)
